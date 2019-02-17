@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/sex_explain_title_textview"
+        fontPath="scdream8.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="@string/sex_explain_text"
+        android:textColor="@color/black_four"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.18"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/sex_explain_sub_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:text="@string/sex_explain_sub_text"
+        android:textColor="@color/brownish_grey_two"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.24"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageButton
+        android:id="@+id/sex_man_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/man"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sex_woman_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.51"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:text="@string/sex_man"
+        app:layout_constraintLeft_toLeftOf="@+id/sex_man_button"
+        app:layout_constraintRight_toRightOf="@+id/sex_man_button"
+        app:layout_constraintTop_toTopOf="@+id/sex_man_button"
+        app:layout_constraintBottom_toBottomOf="@+id/sex_man_button"
+        app:layout_constraintVertical_bias="0.85"/>
+
+    <ImageButton
+        android:id="@+id/sex_woman_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/woman"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toRightOf="@+id/sex_man_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:text="@string/sex_woman"
+        app:layout_constraintLeft_toLeftOf="@+id/sex_woman_button"
+        app:layout_constraintRight_toRightOf="@+id/sex_woman_button"
+        app:layout_constraintTop_toTopOf="@+id/sex_woman_button"
+        app:layout_constraintBottom_toBottomOf="@+id/sex_woman_button"
+        app:layout_constraintVertical_bias="0.85"/>
+
+    <Button
+        android:id="@+id/sex_confirm_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/marigold"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:text="@string/sex_confirm"
+        app:layout_constraintDimensionRatio="360:54"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

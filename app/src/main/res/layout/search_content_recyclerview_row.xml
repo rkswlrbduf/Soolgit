@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/search_content_dong_row_guide_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/search_content_dong_row_store_cardview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="136:120"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/search_content_dong_row_guide_1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/search_content_dong_row_store_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            tools:src="@drawable/sample_image" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_name_textview"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_cardview"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="한성포차 청라점" />
+
+    <ImageView
+        android:id="@+id/search_content_dong_row_store_icon_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/map_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/search_content_dong_row_store_location_textview"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_cardview"
+        app:layout_constraintTop_toTopOf="@+id/search_content_dong_row_store_location_textview" />
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_location_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/brownish_grey_two"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_icon_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/search_content_dong_row_store_name_textview"
+        tools:text="송도 해양경찰서 근처" />
+
+    <View
+        android:id="@+id/search_content_dong_row_store_border_view"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/brown_grey_two"
+        app:layout_constraintBottom_toBottomOf="@+id/search_content_dong_row_store_location_textview"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_location_textview"
+        app:layout_constraintTop_toTopOf="@+id/search_content_dong_row_store_location_textview" />
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_distance_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/brownish_grey_two"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_content_dong_row_store_location_textview"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_border_view"
+        app:layout_constraintTop_toTopOf="@+id/search_content_dong_row_store_location_textview"
+        tools:text="500m" />
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_theme_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/brownish_grey_two"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_cardview"
+        app:layout_constraintTop_toBottomOf="@+id/search_content_dong_row_store_location_textview"
+        tools:text="#분위기 #가성비 #모임장소" />
+
+    <ImageView
+        android:id="@+id/search_content_dong_row_store_heart_icon_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/like_small"
+        app:layout_constraintBottom_toBottomOf="@+id/search_content_dong_row_store_heart_textview"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_cardview"
+        app:layout_constraintTop_toTopOf="@+id/search_content_dong_row_store_heart_textview" />
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_heart_textview"
+        fontPath="notosanskr_regular_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:includeFontPadding="false"
+        android:text="9.1"
+        android:textColor="@color/brownish_grey_two"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/search_content_dong_row_store_heart_icon_imageview" />
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_free_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="2dp"
+        android:text="@string/area_free"
+        android:textColor="@color/brownish_grey_two"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/search_content_dong_row_store_free_service_textview"
+        app:layout_constraintRight_toLeftOf="@+id/search_content_dong_row_store_free_service_textview"
+        app:layout_constraintTop_toTopOf="@+id/search_content_dong_row_store_free_service_textview" />
+
+    <TextView
+        android:id="@+id/search_content_dong_row_store_free_service_textview"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="생맥주 500cc"
+        android:textColor="@color/black_two"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
+

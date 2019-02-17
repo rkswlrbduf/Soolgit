@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="lightGray">#fafafa</color>
+    <color name="mediumGray">#757575</color>
+    <color name="statusBarColor">#232323</color>
+    <color name="cherryRed">#f00034</color>
+    <color name="white">#ffffff</color>
+    <color name="brownish_grey">#606060</color>
+    <color name="black">#232323</color>
+    <color name="black_two">#363636</color>
+    <color name="brownish_grey2">#727272</color>
+    <color name="orangish_red">#ee3c07</color>
+    <color name="black_29">#4a010101</color>
+    <color name="mango">#ffac33</color>
+    <color name="brown_grey">#a8a8a8</color>
+    <color name="very_light_pink">#f1f1f1</color>
+    <color name="lightWhite">#f3f3f3</color>
+    <color name="greyish_brown">#535353</color>
+    <color name="grey">#dcdcdc</color>
+    <color name="brown_grey_two">#979797</color>
+    <color name="brownish_grey_two">#727272</color>
+    <color name="brown_grey_three">#888888</color>
+    <color name="total_black">#000000</color>
+    <color name="black_four">#2f2f2f</color>
+    <color name="coloor">#F6BF42</color>
+    <color name="marigold">#ffbd00</color>
+    <color name="sunflower_yellow">#ffde00</color>
+    <color name="camo_green">#3c1e1e</color>
+    <color name="naver_green">#2DB400</color>
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/service_dialog_coupon_imageview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:adjustViewBounds="true"
+        android:src="@drawable/coupon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/service_dialog_icon_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/map_icon"
+        app:layout_constraintLeft_toLeftOf="@+id/service_dialog_coupon_imageview"
+        app:layout_constraintTop_toTopOf="@+id/service_dialog_coupon_imageview" />
+
+    <TextView
+        android:id="@+id/service_dialog_location_textview"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:text="한성포차 청라점"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/service_dialog_icon_imageview"
+        app:layout_constraintLeft_toRightOf="@+id/service_dialog_icon_imageview"
+        app:layout_constraintTop_toTopOf="@+id/service_dialog_icon_imageview" />
+
+    <ImageButton
+        android:id="@+id/service_dialog_close_imagebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/x"
+        app:layout_constraintBottom_toBottomOf="@+id/service_dialog_icon_imageview"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/service_dialog_icon_imageview" />
+
+    <TextView
+        android:id="@+id/service_dialog_menu_textview"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="생맥주 500cc"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/service_dialog_pinview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/service_dialog_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.607" />
+
+    <blackstone.com.soolgit.Util.Pinview
+        android:id="@+id/service_dialog_pinview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        app:cursorVisible="false"
+        app:forceKeyboard="false"
+        app:inputType="number"
+        app:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@+id/service_dialog_guide_textview"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:password="false"
+        app:pinBackground="@drawable/border_white_number"
+        app:pinHeight="42dp"
+        app:splitWidth="8dp"
+        app:pinLength="4"
+        app:pinWidth="42dp" />
+
+    <TextView
+        android:id="@+id/service_dialog_guide_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:text="확인을 위해 직원에게 보여주세요."
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

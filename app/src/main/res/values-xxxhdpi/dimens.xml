@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="service_dialog_location_textview">56px</dimen>
+</resources>

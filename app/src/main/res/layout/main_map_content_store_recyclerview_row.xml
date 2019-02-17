@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="340:128"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:paddingLeft="24dp">
+
+            <TextView
+                android:id="@+id/main_map_content_row_store_name_textview"
+                fontPath="notosanskr_bold_hestia.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="한성포차 청라점"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/main_map_content_row_store_type_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="주점, 포차"
+                android:textColor="@color/brownish_grey_two"
+                android:textSize="13dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_map_content_row_store_name_textview" />
+
+            <View
+                android:id="@+id/main_map_content_row_store_border_view"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/brown_grey_two"
+                app:layout_constraintBottom_toBottomOf="@+id/main_map_content_row_store_type_textview"
+                app:layout_constraintLeft_toRightOf="@+id/main_map_content_row_store_type_textview"
+                app:layout_constraintTop_toTopOf="@+id/main_map_content_row_store_type_textview" />
+
+            <TextView
+                android:id="@+id/main_map_content_row_store_call_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="032-333-3333"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/main_map_content_row_store_type_textview"
+                app:layout_constraintLeft_toRightOf="@+id/main_map_content_row_store_border_view"
+                app:layout_constraintTop_toTopOf="@+id/main_map_content_row_store_type_textview" />
+
+            <TextView
+                android:id="@+id/main_map_content_row_store_location_textview"
+                fontPath="notosanskr_regular_hestia.otf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="16dp"
+                android:maxLines="2"
+                android:text="인천광역시 서구 청라대로 13-7 호반베르디움 상가 1동"
+                android:textColor="@color/brown_grey_three"
+                android:textSize="11dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/main_map_content_row_store_image_cardview"
+                app:layout_constraintTop_toBottomOf="@+id/main_map_content_row_store_type_textview" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/main_map_content_row_store_image_cardview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="100:108"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/main_map_content_row_store_image_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    tools:src="@drawable/sample_image" />
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
+

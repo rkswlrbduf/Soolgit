@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/notice_row_title_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:text="(주)블랙스톤 합병에 따른 이용계약 및 개인정보 승계" />
+
+    <TextView
+        android:id="@+id/notice_row_time_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/brown_grey"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@+id/notice_row_title_textview"
+        android:text="2018.11.01  10:04:22" />
+
+</android.support.constraint.ConstraintLayout>

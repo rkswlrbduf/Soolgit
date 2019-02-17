@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "798757754934",
+    "firebase_url": "https://soolgit-e6a15.firebaseio.com",
+    "project_id": "soolgit-e6a15",
+    "storage_bucket": "soolgit-e6a15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798757754934:android:bfa764a4ed07ab3c",
+        "android_client_info": {
+          "package_name": "blackstone.com.soolgit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798757754934-h5no2jv7olsrltm6m85f6j4mgsf5tqt8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "blackstone.com.soolgit",
+            "certificate_hash": "b3391fc74cf14a6515fbf1cdeb6fa0412e2d5e5d"
+          }
+        },
+        {
+          "client_id": "798757754934-gq5e345p4v097mhuq8gqso92potprev5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj07yrjZ0JljfSOyR7y_gX2Reoppgog-c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798757754934-gq5e345p4v097mhuq8gqso92potprev5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
