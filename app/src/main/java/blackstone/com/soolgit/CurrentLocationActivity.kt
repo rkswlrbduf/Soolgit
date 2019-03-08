@@ -2,8 +2,8 @@ package blackstone.com.soolgit
 
 import android.app.Activity
 import android.content.Intent
+import android.location.Address
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import blackstone.com.soolgit.Util.BaseActivity
 import blackstone.com.soolgit.Util.MyUtil
@@ -17,6 +17,7 @@ class CurrentLocationActivity : BaseActivity(), OnMapReadyCallback {
 
     private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002
     private var locationTextView: TextView? = null
+    private lateinit var address: Address
 
     private lateinit var map: GoogleMap
     private lateinit var mUtil: MyUtil
@@ -36,7 +37,7 @@ class CurrentLocationActivity : BaseActivity(), OnMapReadyCallback {
 
         current_location_confirm.setOnClickListener {
             val resultIntent = Intent()
-            resultIntent.putExtra("RESULT", locationTextView?.text)
+            resultIntent.putExtra("RESULT", address)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
@@ -48,15 +49,16 @@ class CurrentLocationActivity : BaseActivity(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-        Log.d("TAG", mUtil?.getPermissionGranted().toString())
-        if(mUtil.getPermissionGranted()) {
-            mUtil?.setMap(map)
-            mUtil?.updateLocationUI()
-            mUtil?.getDeviceLocation()
+        if (mUtil.getLocationPermissionGranted()) {
+            mUtil.setMap(map)
+            mUtil.updateLocationUI()
+            mUtil.getDeviceLocation()
+            mUtil.getMap().setOnCameraIdleListener {
+                mUtil.updateCurrentAddress()
+                address = mUtil.getCurrentAddress()
+                locationTextView?.text = address.getAddressLine(0).removePrefix("대한민국 ")
+            }
         }
-        mUtil.setPassiveMapListener()
     }
-
-
 
 }

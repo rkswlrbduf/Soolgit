@@ -13,7 +13,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="false"
-        app:layout_constraintDimensionRatio="336:86"
+        app:layout_constraintDimensionRatio="336:103"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,20 +25,6 @@
             tools:src="@color/colorAccent" />
 
     </android.support.v7.widget.CardView>
-
-    <TextView
-        android:id="@+id/main_home_content_location_row_title_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        fontPath="scdream7.otf"
-        app:layout_constraintBottom_toBottomOf="@+id/main_home_content_location_row_image_cardview"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/main_home_content_location_row_image_cardview"
-        tools:text="한성포차 청라점" />
 
 </android.support.constraint.ConstraintLayout>
 

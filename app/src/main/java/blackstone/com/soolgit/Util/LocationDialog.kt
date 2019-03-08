@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.dialog_location.*
 
 class LocationDialog(val activity: FragmentActivity) : Dialog(activity) {
 
+    companion object {
+        val LOCATION_REQUESTCODE = 1001
+    }
+
     private lateinit var mCallback: callback
 
     interface callback {
@@ -34,7 +38,7 @@ class LocationDialog(val activity: FragmentActivity) : Dialog(activity) {
             dismiss()
         }
         home_dialog_map_location_imagebutton.setOnClickListener {
-            activity.startActivityForResult(Intent(activity, CurrentLocationActivity::class.java), 1001)
+            activity.startActivityForResult(Intent(activity, CurrentLocationActivity::class.java), LOCATION_REQUESTCODE)
             dismiss()
         }
     }

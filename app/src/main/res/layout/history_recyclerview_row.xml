@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <ImageView
+        android:id="@+id/history_row_map_icon_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/map_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/history_row_title_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="송도엄마손"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@id/history_row_map_icon_imageview"
+        app:layout_constraintLeft_toRightOf="@+id/history_row_map_icon_imageview" />
+
+    <View
+        android:id="@+id/history_row_border_view"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/brownish_grey_two"
+        app:layout_constraintBottom_toBottomOf="@id/history_row_map_icon_imageview"
+        app:layout_constraintLeft_toRightOf="@+id/history_row_title_textview"
+        app:layout_constraintTop_toTopOf="@id/history_row_map_icon_imageview" />
+
+    <TextView
+        android:id="@+id/history_row_location_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:text="인천 송도동"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@id/history_row_map_icon_imageview"
+        app:layout_constraintLeft_toRightOf="@+id/history_row_border_view"
+        app:layout_constraintTop_toTopOf="@id/history_row_map_icon_imageview" />
+
+    <TextView
+        android:id="@+id/history_row_menu_textview"
+        fontPath="notosanskr_bold_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="오지는 버터 감자튀김"
+        android:textColor="@color/black"
+        android:textSize="21dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/history_row_location_textview" />
+
+    <TextView
+        android:id="@+id/history_row_time_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018.11.01  10:04:22"
+        android:textColor="@color/brown_grey"
+        android:textSize="10sp"
+        app:layout_constraintTop_toBottomOf="@+id/history_row_menu_textview" />
+
+    <TextView
+        android:id="@+id/history_row_cost_textview"
+        fontPath="notosanskr-black-hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5,000원"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

@@ -11,6 +11,12 @@ interface ServerInterface {
     @GET("hotplace")
     fun hotplacestore(): Call<ArrayList<HotPlaceStoreData>>
 
+    @GET("recommend")
+    fun recommend(): Call<ArrayList<HotPlaceStoreData>>
+
+    @GET("concept")
+    fun concept(): Call<ArrayList<ConceptData>>
+
     @GET("dong")
     fun dong(): Call<List<DongData>>
 
@@ -18,7 +24,7 @@ interface ServerInterface {
     fun store(): Call<ArrayList<StoreData>>
 
     @POST("storedong")
-    fun storedong(@Query("list") list: String?): Call<List<StoreData>>
+    fun storedong(@Query("pointX") PointX: Double?, @Query("pointY") PointY: Double?): Call<ArrayList<StoreData>>
 
     @GET("map")
     fun map(@Query("dy") dy: Double?,
@@ -29,8 +35,8 @@ interface ServerInterface {
     @GET("search")
     fun search(@Query("text") string: String?): Call<ArrayList<StoreData>>
 
-    @GET("storeimage")
-    fun storeimage(@Query("id") string: String?): Call<ArrayList<StoreImageData>>
+    @GET("storedetail")
+    fun storedetail(@Query("id") string: String?): Call<StoreDetailData>
 
     @GET("storenoimagemenu")
     fun storenoimagemenu(@Query("id") string: String?): Call<ArrayList<StoreNoImageMenuData>>
@@ -47,6 +53,13 @@ interface ServerInterface {
     @GET("notice")
     fun notice(): Call<ArrayList<NoticeData>>
 
+    @GET("history")
+    fun history(): Call<ArrayList<HistoryData>>
 
+    @GET("category")
+    fun category(): Call<ArrayList<CategoryData>>
+
+    @GET("theme")
+    fun theme(): Call<ArrayList<ThemeData>>
 
 }

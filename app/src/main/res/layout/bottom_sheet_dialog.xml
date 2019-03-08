@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    android:background="@drawable/top_radius_rectangle" >
+    android:background="@drawable/top_radius_rectangle"
+    app:layout_behavior="@string/bottom_sheet_behavior" >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/store_service_recyclerview"

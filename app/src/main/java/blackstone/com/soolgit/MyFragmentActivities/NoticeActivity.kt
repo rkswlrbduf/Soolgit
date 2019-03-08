@@ -1,11 +1,13 @@
-package blackstone.com.soolgit
+package blackstone.com.soolgit.MyFragmentActivities
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import blackstone.com.soolgit.Adapter.NoticeRecyclerViewAdapter
 import blackstone.com.soolgit.DataClass.NoticeData
+import blackstone.com.soolgit.R
 import blackstone.com.soolgit.Util.BaseActivity
 import blackstone.com.soolgit.Util.ySpacesItemDecoration
 import kotlinx.android.synthetic.main.activity_notice.*
@@ -13,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NoticeActivity: BaseActivity() {
+class NoticeActivity: BaseActivity(), View.OnClickListener {
 
     private var noticeList: ArrayList<NoticeData>? = ArrayList()
 
@@ -40,9 +42,12 @@ class NoticeActivity: BaseActivity() {
             }
         })
 
+        notice_close_imagebutton.setOnClickListener(this)
 
     }
 
-
+    override fun onClick(v: View?) {
+        finish()
+    }
 
 }

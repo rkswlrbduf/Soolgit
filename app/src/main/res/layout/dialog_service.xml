@@ -51,18 +51,31 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/service_dialog_icon_imageview" />
 
+    <ImageView
+        android:id="@+id/service_dialog_menu_imageview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@+id/service_dialog_coupon_imageview"
+        app:layout_constraintBottom_toTopOf="@+id/service_dialog_menu_textview"/>
+
     <TextView
         android:id="@+id/service_dialog_menu_textview"
         fontPath="notosanskr_bold_hestia.otf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="생맥주 500cc"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"
         android:textSize="22dp"
         app:layout_constraintBottom_toTopOf="@+id/service_dialog_pinview"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/service_dialog_menu_imageview" />
 
     <android.support.constraint.Guideline
         android:id="@+id/service_dialog_guide"

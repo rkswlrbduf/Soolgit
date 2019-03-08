@@ -1,9 +1,13 @@
 package blackstone.com.soolgit.Util
 
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -23,25 +27,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.support.v4.os.HandlerCompat.postDelayed
+import blackstone.com.soolgit.DataClass.HotPlaceStoreData
+import blackstone.com.soolgit.DataClass.StoreDetailData
 
 
-class mBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class mBottomSheetDialogFragment() : BottomSheetDialogFragment() {
 
     private var storeServiceList: ArrayList<StoreServiceData>? = ArrayList()
 
     private lateinit var storeServiceRecyclerView: RecyclerView
     private lateinit var storeServiceRecyclerViewAdapter: StoreServiceRecyclerViewAdapter
-    private lateinit var behavior: BottomSheetBehavior<View>
-    private lateinit var toast: Toast
     private lateinit var mUtil: MyUtil
     private lateinit var serviceDialog: ServiceDialog
-    private lateinit var clickListener: StoreServiceRecyclerViewAdapter.ClickListener
+    private var storeData: StoreDetailData? = StoreDetailData()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.bottom_sheet_dialog, container, false)
-        toast = Toast.makeText(context, "CLICKED", Toast.LENGTH_SHORT)
-
         mUtil = MyUtil(context)
+        storeData = arguments?.getParcelable("item")
 
         storeServiceRecyclerView = view.store_service_recyclerview
         storeServiceRecyclerView.layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
@@ -51,9 +54,9 @@ class mBottomSheetDialogFragment : BottomSheetDialogFragment() {
         storeServiceRecyclerViewAdapter = StoreServiceRecyclerViewAdapter(context!!, storeServiceList)
 
         storeServiceRecyclerViewAdapter.setClickListener(object: StoreServiceRecyclerViewAdapter.ClickListener{
-            override fun onClick() {
+            override fun onClick(position: Int) {
                 dismiss()
-                serviceDialog = ServiceDialog(context as StoreActivity)
+                serviceDialog = ServiceDialog(context as StoreActivity, storeServiceList!![position], storeData)
                 serviceDialog.show()
             }
         })
@@ -62,10 +65,13 @@ class mBottomSheetDialogFragment : BottomSheetDialogFragment() {
         return view
     }
 
+    override fun getTheme(): Int = R.style.BottomSheetDialogTheme
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
+
     private fun serviceServer(storeID: String) {
-        BaseActivity.baseServer?.storeservice("1")?.enqueue(object : Callback<ArrayList<StoreServiceData>> {
+        BaseActivity.baseServer?.storeservice(storeID)?.enqueue(object : Callback<ArrayList<StoreServiceData>> {
             override fun onResponse(call: Call<ArrayList<StoreServiceData>>, response: Response<ArrayList<StoreServiceData>>) {
-                Log.d("TAG", response.body()!!.size.toString())
                 storeServiceRecyclerViewAdapter.updateList(response.body()!!)
             }
 
@@ -74,5 +80,4 @@ class mBottomSheetDialogFragment : BottomSheetDialogFragment() {
             }
         })
     }
-
 }

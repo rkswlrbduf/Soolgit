@@ -4,35 +4,45 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
-import android.os.Looper
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import blackstone.com.soolgit.Fragment.BaseFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
+import kotlin.collections.HashMap
 
 class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCallback {
 
     companion object {
         private var mLocationPermissionGranted = false
+        private var mSMSPermissionGranted = false
+        private var mReadPhoneStatePermissionGranted = false
+        private lateinit var currentAddress: Address
+        private lateinit var currentLocation: Location
+        private lateinit var mGeoCoder: Geocoder
     }
 
+    private val gson = Gson()
     private val PREFS_FILENAME = "prefs"
     private val PREF_KEY_ID = "ID"
     private val PREF_KEY_NM = "NM"
     private val PREF_KEY_IMG = "IMG"
     private val PREF_KEY_TYPE = "TYPE"
+    private var hashMapString: String = ""
+    private lateinit var map: GoogleMap
 
     private val prefs: SharedPreferences = mContext!!.getSharedPreferences(PREFS_FILENAME, 0)
 
@@ -48,14 +58,32 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
     var TYPE: String?
         get() = prefs.getString(PREF_KEY_TYPE, "")
         set(value) = prefs.edit().putString(PREF_KEY_TYPE, value).apply()
-
+    var ZZIM: HashMap<String, Boolean>
+        get() {
+            val zzimHashString = prefs.getString("ZZIM", null) ?: return HashMap<String, Boolean>()
+            val type = object : TypeToken<HashMap<String, Boolean>>() {}.type
+            return gson.fromJson<HashMap<String, Boolean>>(zzimHashString, type)
+        }
+        set(value) {
+            val zzimHashString = gson.toJson(value)
+            prefs.edit().putString("ZZIM", zzimHashString).apply()
+        }
+    var FILTERTHEME: HashMap<Int, String>?
+        get() {
+            val themeHashString = prefs.getString("FILTERTHEME", null) ?: return HashMap<Int, String>()
+            val type = object : TypeToken<HashMap<Int, String>>() {}.type
+            return gson.fromJson<HashMap<Int, String>>(themeHashString, type)
+        }
+        set(value) {
+            val themeHashString = gson.toJson(value)
+            prefs.edit().putString("FILTERTHEME", themeHashString).apply()
+        }
     private var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002
     private var mContext: Context? = null
     private var mLocationRequest = LocationRequest()
-    private var mGeoCoder: Geocoder
     private var mFusedLocationProviderClient: FusedLocationProviderClient? = null
     private var mLocationManager: LocationManager
-    private var map: GoogleMap? = null
+
     private val mDefaultLocation = LatLng(37.490446, 126.723578)
     private val DEFAULT_ZOOM = 15f
 
@@ -67,8 +95,6 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
     private var locationTextView: TextView? = null
     private var mLastKnownLocation: Location? = null
 
-
-
     init {
         this.mContext = mContext
         mLocationManager = mContext?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -77,14 +103,30 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
         mLocationRequest.priority = LOCATION_PRIORITY
         mLocationRequest.interval = LOCATION_INTERVAL
         mLocationRequest.fastestInterval = LOCATION_FAST_INTERVAL
+
+        try {
+            mLastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            if (mLastKnownLocation == null) {
+                val location = Location("")
+                location.longitude = 126.707783
+                location.latitude = 37.449537
+                mLastKnownLocation = location
+            }
+            currentAddress = mGeoCoder.getFromLocation(mLastKnownLocation!!.latitude, mLastKnownLocation!!.longitude, 1)[0]
+            currentLocation = mLastKnownLocation!!
+//            if (mLocationPermissionGranted) {
+//                locationTextView?.text = String.format("%s %s %s", currentLocation.locality, currentLocation.subLocality, currentLocation.thoroughfare)
+//            }
+        } catch (e: SecurityException) {
+            e.printStackTrace()
+        }
         mCurrentLocationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult?) {
+            override fun onLocationResult(locationResult: LocationResult) {
                 try {
-                    mLastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    val arrayList = mGeoCoder.getFromLocation(mLastKnownLocation!!.latitude, mLastKnownLocation!!.longitude, 1)
-                    if (mLocationPermissionGranted && !arrayList.isEmpty()) {
-                        locationTextView?.text = String.format("%s %s %s", arrayList[0].locality, arrayList[0].subLocality, arrayList[0].thoroughfare)
-                    }
+                    currentAddress = mGeoCoder.getFromLocation(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude, 1)[0]
+                    currentLocation = locationResult.lastLocation
+                    BusProvider().getInstance().post(currentAddress)
+
                 } catch (e: SecurityException) {
                     e.printStackTrace()
                 }
@@ -92,6 +134,9 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
             }
         }
     }
+
+    fun getCurrentAddress(): Address = currentAddress
+    fun getCurrentLocation(): Location = currentLocation
 
     fun setLocationTextView(locationTextView: TextView?) {
         this.locationTextView = locationTextView
@@ -105,29 +150,19 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
         }
     }
 
-    fun setPassiveMapListener() {
-        map?.setOnCameraIdleListener {
-            val arrayList = mGeoCoder.getFromLocation(map!!.cameraPosition.target.latitude, map!!.cameraPosition.target.longitude, 1)
-            if (mLocationPermissionGranted && !arrayList.isEmpty()) {
-                locationTextView?.text = arrayList[0].getAddressLine(0).removePrefix("대한민국 ")
-            }
-        }
-    }
-
-    fun removeCurrentLocationCallback() {
-        if (mFusedLocationProviderClient != null)
-            mFusedLocationProviderClient?.removeLocationUpdates(mCurrentLocationCallback)
-    }
-
     @TargetApi(Build.VERSION_CODES.M)
     fun callPermission(o: Any, permissions: Array<String>, permissionsId: Int) {
-        if (ContextCompat.checkSelfPermission(mContext!!, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mLocationPermissionGranted = true
-        } else {
-            if (o is BaseFragment) {
-                o.requestPermissions(permissions, permissionsId)
-            } else if (o is BaseActivity) {
-                ActivityCompat.requestPermissions(o, permissions, permissionsId)
+        permissions.forEach {
+            if (ContextCompat.checkSelfPermission(mContext!!, it) == PackageManager.PERMISSION_GRANTED) {
+                when (it) {
+                    android.Manifest.permission.ACCESS_FINE_LOCATION -> mLocationPermissionGranted = true
+                }
+            } else {
+                if (o is BaseFragment) {
+                    o.requestPermissions(permissions, permissionsId)
+                } else if (o is BaseActivity) {
+                    ActivityCompat.requestPermissions(o, permissions, permissionsId)
+                }
             }
         }
     }
@@ -143,8 +178,12 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
         }
     }
 
-    fun getPermissionGranted(): Boolean {
+    fun getLocationPermissionGranted(): Boolean {
         return mLocationPermissionGranted
+    }
+
+    fun getSMSPermissionGranted(): Boolean {
+        return mSMSPermissionGranted && mReadPhoneStatePermissionGranted
     }
 
     fun convertDpToPixel(dp: Float, context: Context): Float {
@@ -155,18 +194,24 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
         return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
     }
 
-    fun setMap(map: GoogleMap?) {
+    fun setMap(map: GoogleMap) {
         this.map = map
+    }
+
+    fun getMap(): GoogleMap = map
+
+    fun updateCurrentAddress() {
+        currentAddress = mGeoCoder.getFromLocation(map.cameraPosition.target.latitude, map.cameraPosition.target.longitude, 1)[0]
     }
 
     fun updateLocationUI() {
         try {
             if (mLocationPermissionGranted) {
-                map?.isMyLocationEnabled = true
-                map?.uiSettings?.isMyLocationButtonEnabled = true
+                map.isMyLocationEnabled = true
+                map.uiSettings.isMyLocationButtonEnabled = true
             } else {
-                map?.isMyLocationEnabled = false
-                map?.uiSettings?.isMyLocationButtonEnabled = false
+                map.isMyLocationEnabled = false
+                map.uiSettings.isMyLocationButtonEnabled = false
                 mLastKnownLocation = null
                 callPermission(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
             }
@@ -182,10 +227,10 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
                 locationResult?.addOnCompleteListener {
                     if (it.isSuccessful) {
                         mLastKnownLocation = it.result
-                        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(mLastKnownLocation!!.latitude, mLastKnownLocation!!.longitude), DEFAULT_ZOOM))
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(mLastKnownLocation!!.latitude, mLastKnownLocation!!.longitude), DEFAULT_ZOOM))
                     } else {
-                        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM))
-                        map?.uiSettings?.isMyLocationButtonEnabled = false
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM))
+                        map.uiSettings.isMyLocationButtonEnabled = false
                     }
                 }
             }

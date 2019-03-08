@@ -1,0 +1,131 @@
+<blackstone.com.soolgit.Util.CollapsibleToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:minHeight="67dp"
+    app:layoutDescription="@xml/fragment_area_motion_scene"
+    app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
+
+    <TextView
+        android:id="@+id/main_area_header_location_textview"
+        fontPath="scdream6.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="63dp"
+        android:textColor="#000000"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/main_area_header_category_textview"
+        fontPath="scdream2.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="106dp"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/black"
+        android:text="종류 전체"
+        android:textSize="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/main_area_header_category_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_8dp_light_white"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_category_textview"
+        app:layout_constraintEnd_toEndOf="@+id/main_area_header_category_textview"
+        app:layout_constraintStart_toStartOf="@+id/main_area_header_category_textview"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_category_textview" />
+
+    <View
+        android:id="@+id/main_area_header_category_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/grey"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_category_textview"
+        app:layout_constraintStart_toEndOf="@+id/main_area_header_category_textview"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_category_textview" />
+
+    <TextView
+        android:id="@+id/main_area_header_theme_textview"
+        fontPath="scdream2.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="106dp"
+        android:textColor="@color/black"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="4dp"
+        android:text="테마 전체"
+        android:textSize="11dp"
+        app:layout_constraintStart_toEndOf="@+id/main_area_header_category_textview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/main_area_header_theme_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_8dp_light_white"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_theme_textview"
+        app:layout_constraintEnd_toEndOf="@+id/main_area_header_theme_textview"
+        app:layout_constraintStart_toStartOf="@+id/main_area_header_theme_textview"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_theme_textview" />
+
+    <ImageView
+        android:id="@+id/main_area_header_filter_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/filter"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_theme_textview"
+        app:layout_constraintEnd_toStartOf="@+id/main_area_header_map_small_imageview"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_theme_textview" />
+
+    <ImageView
+        android:id="@+id/main_area_header_map_small_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/map_small"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_theme_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_theme_textview" />
+
+    <ImageView
+        android:id="@+id/main_area_header_search_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/search_custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/main_area_content_header_location_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/custom_my_location"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_location_textview"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_location_textview"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/main_area_header_location_textview"/>
+
+</blackstone.com.soolgit.Util.CollapsibleToolbar>

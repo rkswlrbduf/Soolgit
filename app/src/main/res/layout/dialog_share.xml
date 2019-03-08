@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_round_10dp"
+    android:paddingTop="16dp"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/dialog_share_title"
+        fontPath="scdream4.otf"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:autoSizeTextType="uniform"
+        android:text="@string/dialog_share_title"
+        android:textColor="@color/black_four"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_share_kakao_container"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/dialog_share_kakao_container"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border_1dp_light_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_share_sms_container"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_share_title">
+
+        <ImageView
+            android:id="@+id/dialog_share_kakao_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:src="@drawable/kakao"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_share_kakao_textView"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_share_kakao_textView"
+            fontPath="scdream5.otf"
+            android:textColor="@color/black_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_share_kakao"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_share_kakao_imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dialog_share_kakao_imageView"
+            app:layout_constraintTop_toTopOf="@+id/dialog_share_kakao_imageView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/dialog_share_sms_container"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border_1dp_light_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_share_cancel_textview"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_share_kakao_container">
+
+        <ImageView
+            android:id="@+id/dialog_share_sms_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:src="@drawable/sms"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_share_sms_textView"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_share_sms_textView"
+            fontPath="scdream5.otf"
+            android:textColor="@color/black_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_share_sms"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_share_sms_imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dialog_share_sms_imageView"
+            app:layout_constraintTop_toTopOf="@+id/dialog_share_sms_imageView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/dialog_share_cancel_textview"
+        fontPath="notosanskr_medium_hestia.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_share_cancel"
+        android:textColor="@color/black_two"
+        android:layout_marginTop="15dp"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_share_sms_container" />
+
+</android.support.constraint.ConstraintLayout>

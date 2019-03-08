@@ -16,5 +16,7 @@ class MapData {
     var StorePointX: Double? = null
     @SerializedName("STORE_POINT_Y")
     var StorePointY: Double? = null
+    @SerializedName("STORE_IMG")
+    var StoreImage: String? = null
 
 }

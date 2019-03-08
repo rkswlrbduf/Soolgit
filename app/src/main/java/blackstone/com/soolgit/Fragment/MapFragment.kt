@@ -36,7 +36,7 @@ class MapFragment : BaseFragment(), GoogleMap.OnCameraIdleListener, GoogleMap.On
     private var mLastKnownLocation: Location? = null
     private var mCameraPosition: CameraPosition? = null
     private var mapView: MapView? = null
-    private var map: GoogleMap? = null
+    private lateinit var map: GoogleMap
     private var layoutManager: LinearLayoutManager? = null
     private var markerArray = ArrayList<Marker>()
     private var pinUnselected: BitmapDescriptor? = null
@@ -86,6 +86,7 @@ class MapFragment : BaseFragment(), GoogleMap.OnCameraIdleListener, GoogleMap.On
             map = it
             mUtil?.setMap(map)
         }
+
         pinUnselected = BitmapDescriptorFactory.fromResource(R.drawable.pin_unselected)
         pinSelected = BitmapDescriptorFactory.fromResource(R.drawable.pin_selected)
         mRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -135,7 +136,7 @@ class MapFragment : BaseFragment(), GoogleMap.OnCameraIdleListener, GoogleMap.On
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.layoutManager = layoutManager
-        recyclerView.addItemDecoration(xSpacesItemDecoration(1, convertDpToPixel(10f, context!!).toInt(), false))
+        recyclerView.addItemDecoration(xSpacesItemDecoration(1, convertDpToPixel(10f, context!!).toInt(), true))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

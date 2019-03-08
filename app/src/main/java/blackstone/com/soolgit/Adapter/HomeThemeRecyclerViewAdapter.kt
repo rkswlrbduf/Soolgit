@@ -23,7 +23,7 @@ class HomeThemeRecyclerViewAdapter(val context: Context, var list: ArrayList<Hot
                 .into(helper.getView(R.id.main_home_content_theme_row_store_image_imageview))
     }
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = list!!.size
 
     open fun updateList(list: ArrayList<HotPlaceStoreData>) {
         this.list?.clear()

@@ -1,10 +1,14 @@
 package blackstone.com.soolgit
 
+import android.content.ActivityNotFoundException
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -12,29 +16,32 @@ import android.widget.TextView
 import blackstone.com.soolgit.Adapter.StoreImageSliderAdapter
 import blackstone.com.soolgit.Adapter.StoreNoImageMenuRecyclerViewAdapter
 import blackstone.com.soolgit.Adapter.StorePlaceRecyclerViewAdapter
-import blackstone.com.soolgit.Adapter.StoreServiceRecyclerViewAdapter
-import blackstone.com.soolgit.DataClass.*
+import blackstone.com.soolgit.DataClass.StoreDetailData
+import blackstone.com.soolgit.DataClass.StoreImageMenuData
+import blackstone.com.soolgit.DataClass.StoreNoImageMenuData
+import blackstone.com.soolgit.DataClass.StorePlaceData
+import blackstone.com.soolgit.Util.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.chad.library.adapter.base.BaseQuickAdapter
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import kotlinx.android.synthetic.main.activity_store.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.support.design.widget.BottomSheetDialog
-import android.support.v4.widget.NestedScrollView
-import android.view.MotionEvent
-import blackstone.com.soolgit.Util.*
+import android.content.Intent
+import android.net.Uri
 
 
-class StoreActivity : BaseActivity() {
+class StoreActivity : BaseActivity(), View.OnClickListener {
 
+    private var storeImageList: ArrayList<String>? = ArrayList()
     private var storeNoImageMenuList: ArrayList<StoreNoImageMenuData>? = ArrayList()
-    private var storeImageList: ArrayList<StoreImageData>? = ArrayList()
     private var storePlaceList: ArrayList<StorePlaceData>? = ArrayList()
-//    private var storeServiceList: ArrayList<StoreServiceData>? = ArrayList()
     private var dotsIndicator: WormDotsIndicator? = null
+    private var bundle: Bundle? = Bundle()
+    private var storeDetailData: StoreDetailData = StoreDetailData()
+
+    private lateinit var mUtil: MyUtil
 
     private lateinit var storeViewPager: ViewPager
     private lateinit var storeViewPagerAdapter: StoreImageSliderAdapter
@@ -48,24 +55,41 @@ class StoreActivity : BaseActivity() {
     private lateinit var storeNoImageMenurecyclerView: RecyclerView
     private lateinit var storePlaceRecyclerView: RecyclerView
     private lateinit var storePlaceRecyclerViewAdapter: StorePlaceRecyclerViewAdapter
-    private lateinit var storeContainer: NestedScrollView
 
-//    private lateinit var storeServiceRecyclerView: RecyclerView
-//    private lateinit var storeServiceRecyclerViewAdapter: StoreServiceRecyclerViewAdapter
-//    private lateinit var behavior: BottomSheetBehavior<View>
-//    private lateinit var serviceDialog: ServiceDialog
+    private lateinit var storeZzimImageView: ImageView
+    private lateinit var storeShareImageView: ImageView
+    private lateinit var storeConfirmTextView: TextView
+
+    private lateinit var storeIntroTitleTextView: TextView
+    private lateinit var storeIntroThemeTextView: TextView
+    private lateinit var storeInformMapTextView: TextView
+    private lateinit var storeInformTimeTextView: TextView
+    private lateinit var storeInformCallTextView: TextView
+
+    private lateinit var storeContainer: NestedScrollView
+    private lateinit var storeID: String
 
     private fun init() {
+
+        mUtil = MyUtil(this)
+
         storeImageMenuLeftImageView = store_menu_left_imageview
         storeImageMenuRightImageView = store_menu_right_imageview
         storeImageMenuLeftTitleTextView = store_menu_left_title_textview
         storeImageMenuRightTitleTextView = store_menu_right_title_textview
         storeImageMenuLeftCostTextView = store_menu_left_cost_textview
         storeImageMenuRightCostTextView = store_menu_right_cost_textview
-
+        storeZzimImageView = store_zzim_imageview
+        storeShareImageView = store_share_imageview
         storeViewPager = store_image_viewpager
+        storeConfirmTextView = store_confirm_textview
         storeViewPagerAdapter = StoreImageSliderAdapter(this, storeImageList)
         storeViewPager.adapter = storeViewPagerAdapter
+        storeIntroTitleTextView = store_intro_title_textview
+        storeIntroThemeTextView = store_intro_theme_textview
+        storeInformMapTextView = store_inform_map_textview
+        storeInformTimeTextView = store_inform_time_textview
+        storeInformCallTextView = store_inform_call_textview
 
         storeNoImageMenurecyclerView = store_menu_recyclerview
         storeNoImageMenurecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -83,59 +107,17 @@ class StoreActivity : BaseActivity() {
         storePlaceRecyclerViewAdapter = StorePlaceRecyclerViewAdapter(this, storePlaceList)
         storePlaceRecyclerView.adapter = storePlaceRecyclerViewAdapter
 
-
-//        storeContainer = store_container
-//        storeContainer.setOnTouchListener(object: View.OnTouchListener{
-//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//                return true
-//            }
-//        })
-
-//        storeServiceRecyclerView = store_service_recyclerview
-//        storeServiceRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        storeServiceRecyclerView.addItemDecoration(ySpacesItemDecoration(1, convertDpToPixel(24f, this).toInt(), false))
-//        storeServiceRecyclerView.setHasFixedSize(true)
-//        storeServiceRecyclerView.isNestedScrollingEnabled = true
-//        storeServiceRecyclerViewAdapter = StoreServiceRecyclerViewAdapter(this, storeServiceList)
-//        storeServiceRecyclerViewAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
-//            //val item = adapter.getItem(position) as StoreServiceData
-//            log("OK")
-//            serviceDialog = ServiceDialog(this)
-//            serviceDialog.show()
-//
-//        }
-//        storeServiceRecyclerView.adapter = storeServiceRecyclerViewAdapter
-//
-//        behavior = BottomSheetBehavior.from(store_service_container)
-//        behavior.state = BottomSheetBehavior.STATE_HIDDEN
-
-
         dotsIndicator = store_dotsindicator
         dotsIndicator?.setViewPager(storeViewPager)
 
-        store_confirm_textview.setOnClickListener {
-//            if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) behavior.state = BottomSheetBehavior.STATE_HIDDEN
-//            else {
-//                behavior.state = BottomSheetBehavior.STATE_EXPANDED
-//                storeServiceRecyclerView.focus
-//            }
-            val bottomSheetDialog = mBottomSheetDialogFragment()
-            bottomSheetDialog.show(supportFragmentManager, "bottomSheet")
+        storeID = intent.getStringExtra("ID")
 
+        storeZzimImageView.setOnClickListener(this)
+        storeShareImageView.setOnClickListener(this)
+        storeConfirmTextView.setOnClickListener(this)
+        if (mUtil.ZZIM[storeID] != null) {
+            storeZzimImageView.setImageResource(R.drawable.like_button_active)
         }
-//
-//        behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-//            override fun onStateChanged(bottomSheet: View, newState: Int) {
-//                if (newState == BottomSheetBehavior.STATE_HIDDEN)
-//                    dim_bg.visibility = View.GONE
-//            }
-//
-//            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-//                dim_bg.visibility = View.VISIBLE
-//                dim_bg.alpha = slideOffset
-//            }
-//        })
-
 
     }
 
@@ -143,46 +125,51 @@ class StoreActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_store)
         init()
-        noImageMenuServer(intent.getStringExtra("ID"))
-        headerImageServer(intent.getStringExtra("ID"))
-        imageMenuServer(intent.getStringExtra("ID"))
-        placeServer(intent.getStringExtra("ID"))
-//        serviceServer(intent.getStringExtra("ID"))
+        storeServer(storeID)
+        imageMenuServer(storeID)
+        noImageMenuServer(storeID)
+        placeServer(storeID)
     }
 
-    private fun headerImageServer(storeID: String) {
-        baseServer?.storeimage(storeID)?.enqueue(object : Callback<java.util.ArrayList<StoreImageData>> {
-            override fun onResponse(call: Call<java.util.ArrayList<StoreImageData>>, response: Response<java.util.ArrayList<StoreImageData>>) {
-                log(response.body()!!.toString())
-                storeViewPagerAdapter.updateList(response.body()!!)
+    private fun storeServer(id: String) {
+        baseServer?.storedetail(id)?.enqueue(object : Callback<StoreDetailData> {
+            override fun onResponse(call: Call<StoreDetailData>, response: Response<StoreDetailData>) {
+                storeDetailData = response.body()!!
+
+                storeViewPagerAdapter.updateList(storeDetailData.IMG_PATH)
+                storeIntroTitleTextView.text = storeDetailData.STORE_NM
+                storeIntroThemeTextView.text = storeDetailData.THEME_NM?.joinToString(" ")
+                storeInformMapTextView.text = storeDetailData.STORE_B_LCN
+                storeInformTimeTextView.text = storeDetailData.STORE_TIME
+                storeInformCallTextView.text = storeDetailData.STORE_CALL
             }
 
-            override fun onFailure(call: Call<java.util.ArrayList<StoreImageData>>, t: Throwable) {
+            override fun onFailure(call: Call<StoreDetailData>, t: Throwable) {
                 Log.e("HPRVAdapter Retro Err", t.toString())
             }
         })
     }
 
-    private fun imageMenuServer(storeID: String) {
-        baseServer?.storeimagemenu(storeID)?.enqueue(object : Callback<ArrayList<StoreImageMenuData>> {
+    private fun imageMenuServer(id: String) {
+        baseServer?.storeimagemenu(id)?.enqueue(object : Callback<ArrayList<StoreImageMenuData>> {
             override fun onResponse(call: Call<ArrayList<StoreImageMenuData>>, response: Response<ArrayList<StoreImageMenuData>>) {
                 val res = response.body()
                 Glide.with(this@StoreActivity)
                         .load(res!![0].MENU_IMG_PATH)
                         .apply(RequestOptions().centerCrop())
                         .apply(RequestOptions.overrideOf(storeImageMenuLeftImageView.width, storeImageMenuLeftImageView.height))
-                        .apply(RequestOptions.placeholderOf(R.drawable.garyplaceholder))
+                        .apply(RequestOptions.placeholderOf(ColorDrawable(ContextCompat.getColor(this@StoreActivity, R.color.very_light_pink))))
                         .into(storeImageMenuLeftImageView)
                 Glide.with(this@StoreActivity)
-                        .load(res!![1].MENU_IMG_PATH)
+                        .load(res[1].MENU_IMG_PATH)
                         .apply(RequestOptions().centerCrop())
                         .apply(RequestOptions.overrideOf(storeImageMenuRightImageView.width, storeImageMenuRightImageView.height))
-                        .apply(RequestOptions.placeholderOf(R.drawable.garyplaceholder))
+                        .apply(RequestOptions.placeholderOf(ColorDrawable(ContextCompat.getColor(this@StoreActivity, R.color.very_light_pink))))
                         .into(storeImageMenuRightImageView)
-                storeImageMenuLeftTitleTextView.text = res!![0].MENU_NM
-                storeImageMenuRightTitleTextView.text = res!![1].MENU_NM
-                storeImageMenuLeftCostTextView.text = res!![0].MENU_COST
-                storeImageMenuLeftCostTextView.text = res!![1].MENU_COST
+                storeImageMenuLeftTitleTextView.text = res[0].MENU_NM
+                storeImageMenuRightTitleTextView.text = res[1].MENU_NM
+                storeImageMenuLeftCostTextView.text = res[0].MENU_COST
+                storeImageMenuLeftCostTextView.text = res[1].MENU_COST
             }
 
             override fun onFailure(call: Call<ArrayList<StoreImageMenuData>>, t: Throwable) {
@@ -191,8 +178,8 @@ class StoreActivity : BaseActivity() {
         })
     }
 
-    private fun noImageMenuServer(storeID: String) {
-        baseServer?.storenoimagemenu(storeID)?.enqueue(object : Callback<ArrayList<StoreNoImageMenuData>> {
+    private fun noImageMenuServer(id: String) {
+        baseServer?.storenoimagemenu(id)?.enqueue(object : Callback<ArrayList<StoreNoImageMenuData>> {
             override fun onResponse(call: Call<ArrayList<StoreNoImageMenuData>>, response: Response<ArrayList<StoreNoImageMenuData>>) {
                 storeNoImageMenuRecyclerViewAdapter.updateList(response.body()!!)
             }
@@ -203,8 +190,8 @@ class StoreActivity : BaseActivity() {
         })
     }
 
-    private fun placeServer(storeID: String) {
-        baseServer?.storeplace("1")?.enqueue(object : Callback<ArrayList<StorePlaceData>> {
+    private fun placeServer(id: String) {
+        baseServer?.storeplace(id)?.enqueue(object : Callback<ArrayList<StorePlaceData>> {
             override fun onResponse(call: Call<ArrayList<StorePlaceData>>, response: Response<ArrayList<StorePlaceData>>) {
                 storePlaceRecyclerViewAdapter.updateList(response.body()!!)
             }
@@ -215,17 +202,60 @@ class StoreActivity : BaseActivity() {
         })
     }
 
-//    private fun serviceServer(storeID: String) {
-//        baseServer?.storeservice("1")?.enqueue(object : Callback<ArrayList<StoreServiceData>> {
-//            override fun onResponse(call: Call<ArrayList<StoreServiceData>>, response: Response<ArrayList<StoreServiceData>>) {
-//                Log.d("TAG", response.body()!!.size.toString())
-//                storeServiceRecyclerViewAdapter.updateList(response.body()!!)
-//            }
-//
-//            override fun onFailure(call: Call<ArrayList<StoreServiceData>>, t: Throwable) {
-//                Log.e("HPRVAdapter Retro Err", t.toString())
-//            }
-//        })
-//    }
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.store_zzim_imageview -> {
+                if (mUtil.ZZIM[storeID] == null) {
+                    val hashMap = mUtil.ZZIM
+                    hashMap.put(storeID, true)
+                    mUtil.ZZIM = hashMap
+                    storeZzimImageView.setImageResource(R.drawable.like_button_active)
+                } else {
+                    val hashMap = mUtil.ZZIM
+                    hashMap.remove(storeID)
+                    mUtil.ZZIM = hashMap
+                    storeZzimImageView.setImageResource(R.drawable.like_button_inactvie)
+                }
+            }
+            R.id.store_share_imageview -> {
+                val message = "[술깃한제안]\n" +
+                        mUtil.NM +
+                        "님이 추천하는 술집!!\n\n" +
+                        storeIntroTitleTextView.text + "\n" +
+                        storeInformMapTextView.text + "\n" +
+                        storeInformCallTextView.text + "\n" +
+                        "지금 바로 술깃한제안 앱에서 바로 확인 해 보세요!"
+                val shareDialog = ShareDialog(this)
+                shareDialog.setOnShareDialogClickListener(object : ShareDialog.sharedCallBack {
+                    override fun onKakaoClick() {
+                        try {
+                            val intent = Intent(Intent.ACTION_SEND)
+                            intent.type = "text/plain"
+                            intent.putExtra(Intent.EXTRA_TEXT, message)
+                            intent.setPackage("com.kakao.talk")
+                            startActivity(intent)
+                        } catch (e: ActivityNotFoundException) {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse("market://details?id=" + "com.kakao.talk")
+                            startActivity(intent)
+                        }
+                    }
 
+                    override fun onSmsClick() {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.putExtra("sms_body", message)
+                        intent.type = "vnd.android-dir/mms-sms"
+                        startActivity(intent)
+                    }
+                })
+                shareDialog.show()
+            }
+            R.id.store_confirm_textview -> {
+                val bottomSheetDialog = mBottomSheetDialogFragment()
+                bundle?.putParcelable("item", storeDetailData)
+                bottomSheetDialog.arguments = bundle
+                bottomSheetDialog.show(supportFragmentManager, "bottomSheet")
+            }
+        }
+    }
 }

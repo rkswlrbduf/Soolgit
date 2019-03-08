@@ -37,7 +37,19 @@
     <string name="store_confirm">서비스 이용하기</string>
     <string name="store_service">서비스를 선택해주세요.</string>
     <string name="notice_notice">공지사항</string>
+    <string name="history_history">이용내역</string>
     <string name="kakao_use">카카오톡으로 이용하기</string>
     <string name="naver_use">네이버로 이용하기</string>
     <string name="google_use">Google로 이용하기</string>
+    <string name="my_etc_profile">매일매일 새로운 경험, 술깃한제안</string>
+    <string name="filter_filter">필터</string>
+    <string name="filter_sort">정렬</string>
+    <string name="filter_theme">테마</string>
+    <string name="filter_category">종류</string>
+    <string name="filter_apply">필터 적용</string>
+    <string name="dialog_share_title">친구에게 알리기\n이 정보를 주변 지인들에게 공유하세요.</string>
+    <string name="dialog_share_kakao">카카오톡으로 보내기</string>
+    <string name="dialog_share_sms">문자 메세지로 보내기</string>
+    <string name="dialog_share_cancel">취소</string>
+    <string name="filter_theme_choice">개 선택</string>
 </resources>

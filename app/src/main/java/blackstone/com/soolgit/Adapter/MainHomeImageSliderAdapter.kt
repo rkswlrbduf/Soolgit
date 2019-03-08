@@ -25,7 +25,7 @@ class MainHomeImageSliderAdapter(private val context: Context, private val list:
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = ImageView(context)
         Glide.with(context)
-                .load("https://s3.ap-northeast-2.amazonaws.com/soolgitbucket01/header.png")
+                .load("https://s3.ap-northeast-2.amazonaws.com/soolgitbucket01/banner/banner4.png")
                 .apply(RequestOptions().centerCrop())
                 .apply(RequestOptions.overrideOf(view.width, view.height))
                 .apply(RequestOptions.placeholderOf(ColorDrawable(ContextCompat.getColor(context, R.color.very_light_pink))))

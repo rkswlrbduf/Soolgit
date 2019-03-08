@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_area_content_dong_row_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -18,9 +19,9 @@
         android:layout_height="0dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="136:120"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/main_area_content_dong_row_guide_1">
+        app:layout_constraintRight_toLeftOf="@+id/main_area_content_dong_row_guide_1"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/main_area_content_dong_row_store_imageview"
@@ -33,12 +34,12 @@
 
     <TextView
         android:id="@+id/main_area_content_dong_row_store_name_textview"
+        fontPath="notosanskr_bold_hestia.otf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="11dp"
         android:textColor="@color/black"
         android:textSize="18dp"
-        fontPath="notosanskr_bold_hestia.otf"
         app:layout_constraintLeft_toRightOf="@+id/main_area_content_dong_row_store_cardview"
         app:layout_constraintTop_toTopOf="@+id/main_area_content_dong_row_imageview"
         tools:text="한성포차 청라점" />
@@ -58,9 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="6dp"
         android:textColor="@color/brownish_grey_two"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintLeft_toRightOf="@+id/main_area_content_dong_row_store_icon_imageview"
         app:layout_constraintTop_toBottomOf="@+id/main_area_content_dong_row_store_name_textview"
         tools:text="송도 해양경찰서 근처" />
@@ -83,7 +84,7 @@
         android:layout_height="0dp"
         android:layout_marginLeft="5dp"
         android:textColor="@color/brownish_grey_two"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="@+id/main_area_content_dong_row_store_location_textview"
         app:layout_constraintLeft_toRightOf="@+id/main_area_content_dong_row_store_border_view"
         app:layout_constraintTop_toTopOf="@+id/main_area_content_dong_row_store_location_textview"
@@ -96,7 +97,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginTop="4dp"
         android:textColor="@color/brownish_grey_two"
-        android:textSize="12dp"
+        android:textSize="13dp"
         app:layout_constraintLeft_toRightOf="@+id/main_area_content_dong_row_store_cardview"
         app:layout_constraintTop_toBottomOf="@+id/main_area_content_dong_row_store_location_textview"
         tools:text="#분위기 #가성비 #모임장소" />
@@ -113,12 +114,12 @@
 
     <TextView
         android:id="@+id/main_area_content_dong_row_store_heart_textview"
+        fontPath="notosanskr_regular_hestia.otf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
         android:includeFontPadding="false"
         android:text="9.1"
-        fontPath="notosanskr_regular_hestia.otf"
         android:textColor="@color/brownish_grey_two"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -138,9 +139,9 @@
 
     <TextView
         android:id="@+id/main_area_content_dong_row_store_free_service_textview"
+        fontPath="notosanskr_bold_hestia.otf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fontPath="notosanskr_bold_hestia.otf"
         android:text="생맥주 500cc"
         android:textColor="@color/black_two"
         android:textSize="14dp"

@@ -32,10 +32,10 @@ class StoreData {
     var StoreCall: String? = null
 
     @SerializedName("STORE_POINT_X")
-    var StorePointX: String? = null
+    var StorePointX: Double? = null
 
     @SerializedName("STORE_POINT_Y")
-    var StorePointY: String? = null
+    var StorePointY: Double? = null
 
     @SerializedName("STORE_MENU_LIST")
     var StoreMenuList: ArrayList<String>? = null

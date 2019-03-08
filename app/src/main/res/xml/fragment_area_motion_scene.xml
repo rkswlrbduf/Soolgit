@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="2000"
+        app:interpolator="linear">
+
+        <ConstraintSet android:id="@+id/start">
+
+            <Constraint
+                android:id="@+id/main_area_header_location_textview"
+                fontPath="scdream6.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="63dp"
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                android:textColor="#000000"
+                android:textSize="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </Constraint>
+
+            <Constraint
+                android:id="@+id/main_area_header_category_textview"
+                fontPath="scdream2.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="106dp"
+                android:background="@drawable/border_8dp_light_white"
+                android:paddingStart="14dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="4dp"
+                android:text="종류 전체"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@+id/main_area_header_category_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/border_8dp_light_white"
+                android:paddingStart="14dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="4dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/main_area_header_category_textview"
+                app:layout_constraintEnd_toEndOf="@+id/main_area_header_category_textview"
+                app:layout_constraintStart_toStartOf="@+id/main_area_header_category_textview"
+                app:layout_constraintTop_toTopOf="@+id/main_area_header_category_textview" />
+
+            <Constraint
+                android:id="@+id/main_area_header_category_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/grey"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/main_area_header_category_textview"
+                app:layout_constraintStart_toEndOf="@+id/main_area_header_category_textview"
+                app:layout_constraintTop_toTopOf="@+id/main_area_header_category_textview" />
+
+            <Constraint
+                android:id="@+id/main_area_header_theme_textview"
+                fontPath="scdream2.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="106dp"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="카테고리 전체"
+                android:textColor="@color/black"
+                android:textSize="11dp"
+                app:layout_constraintStart_toEndOf="@+id/main_area_header_category_textview"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@+id/main_area_header_theme_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/border_8dp_light_white"
+                app:layout_constraintBottom_toBottomOf="@+id/main_area_header_theme_textview"
+                app:layout_constraintEnd_toEndOf="@+id/main_area_header_theme_textview"
+                app:layout_constraintStart_toStartOf="@+id/main_area_header_theme_textview"
+                app:layout_constraintTop_toTopOf="@+id/main_area_header_theme_textview" />
+
+            <Constraint
+                android:id="@+id/main_area_header_filter_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/filter"
+                app:layout_constraintBottom_toBottomOf="@+id/main_area_header_theme_textview"
+                app:layout_constraintEnd_toStartOf="@+id/main_area_header_map_small_imageview"
+                app:layout_constraintTop_toTopOf="@+id/main_area_header_theme_textview" />
+
+            <Constraint
+                android:id="@+id/main_area_header_map_small_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/map_small"
+                app:layout_constraintBottom_toBottomOf="@+id/main_area_header_theme_textview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/main_area_header_theme_textview" />
+
+            <Constraint
+                android:id="@+id/main_area_header_search_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/search_custom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@+id/main_area_content_header_location_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/custom_my_location"
+                app:layout_constraintBottom_toBottomOf="@+id/main_area_header_location_textview"
+                app:layout_constraintStart_toEndOf="@+id/main_area_header_location_textview"
+                app:layout_constraintTop_toTopOf="@+id/main_area_header_location_textview" />
+
+        </ConstraintSet>
+
+
+
+
+
+
+
+
+        <ConstraintSet android:id="@+id/end">
+
+            <Constraint
+                android:id="@id/main_area_header_location_textview"
+                fontPath="scdream6.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="23dp"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </Constraint>
+
+            <Constraint
+                android:id="@id/main_area_header_category_textview"
+                fontPath="scdream2.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginBottom="10dp"
+                android:text="종류 전체"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Constraint
+                android:id="@id/main_area_header_category_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/border_8dp_light_white"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/main_area_header_category_textview"
+                app:layout_constraintEnd_toEndOf="@id/main_area_header_category_textview"
+                app:layout_constraintStart_toStartOf="@id/main_area_header_category_textview"
+                app:layout_constraintTop_toTopOf="@id/main_area_header_category_textview" />
+
+            <Constraint
+                android:id="@id/main_area_header_category_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/grey"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/main_area_header_category_textview"
+                app:layout_constraintStart_toEndOf="@id/main_area_header_category_textview"
+                app:layout_constraintTop_toTopOf="@id/main_area_header_category_textview" />
+
+            <Constraint
+                android:id="@id/main_area_header_theme_textview"
+                fontPath="scdream2.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="카테고리 전체"
+                android:textColor="@color/black"
+                android:textSize="11dp"
+                app:layout_constraintStart_toEndOf="@id/main_area_header_category_line"
+                app:layout_constraintTop_toTopOf="@id/main_area_header_category_textview" />
+
+            <Constraint
+                android:id="@id/main_area_header_theme_background"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/border_8dp_light_white"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/main_area_header_theme_textview"
+                app:layout_constraintEnd_toEndOf="@id/main_area_header_theme_textview"
+                app:layout_constraintStart_toStartOf="@id/main_area_header_theme_textview"
+                app:layout_constraintTop_toTopOf="@id/main_area_header_theme_textview" />
+
+            <Constraint
+                android:id="@id/main_area_header_filter_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="22dp"
+                android:src="@drawable/filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/main_area_header_map_small_imageview" />
+
+            <Constraint
+                android:id="@id/main_area_header_map_small_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="22dp"
+                android:src="@drawable/map_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Constraint
+                android:id="@id/main_area_header_search_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/search_custom"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Constraint
+                android:id="@id/main_area_content_header_location_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:visibility="invisible"
+                android:src="@drawable/custom_my_location"
+                app:layout_constraintBottom_toBottomOf="@id/main_area_header_location_textview"
+                app:layout_constraintStart_toEndOf="@id/main_area_header_location_textview"
+                app:layout_constraintTop_toTopOf="@id/main_area_header_location_textview" />
+
+        </ConstraintSet>
+    </Transition>
+
+</MotionScene>

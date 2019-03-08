@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/filter_apply_textView"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/filter_back_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/arrow_black"
+                app:layout_constraintBottom_toTopOf="@+id/filter_bar_border_View"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/filter_filter_textView"
+                fontPath="scdream5.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_filter"
+                android:textColor="@color/black_two"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/filter_bar_border_View"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/filter_bar_border_View"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="60dp"
+                android:background="@color/very_light_pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/filter_sort_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="29dp"
+                android:text="@string/filter_sort"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_bar_border_View" />
+
+            <TextView
+                android:id="@+id/filter_sort_recommend_textView"
+                fontPath="scdream3.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/sort_padding_10_checked"
+                android:text="술깃한 추천순"
+                android:textColor="@color/black_two"
+                android:textSize="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_sort_textView" />
+
+            <TextView
+                android:id="@+id/filter_sort_zzim_textView"
+                fontPath="scdream3.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/sort_padding_10_unchecked"
+                android:text="찜 많은 순"
+                android:textColor="@color/very_light_pink_two"
+                android:textSize="14dp"
+                app:layout_constraintStart_toEndOf="@+id/filter_sort_recommend_textView"
+                app:layout_constraintTop_toBottomOf="@+id/filter_sort_textView" />
+
+            <TextView
+                android:id="@+id/filter_sort_distance_textView"
+                fontPath="scdream3.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/sort_padding_10_unchecked"
+                android:text="거리 순"
+                android:textColor="@color/very_light_pink_two"
+                android:textSize="14dp"
+                app:layout_constraintStart_toEndOf="@+id/filter_sort_zzim_textView"
+                app:layout_constraintTop_toBottomOf="@+id/filter_sort_textView" />
+
+            <View
+                android:id="@+id/filter_sort_border_View"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="38dp"
+                android:background="@color/very_light_pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_sort_distance_textView" />
+
+            <TextView
+                android:id="@+id/filter_category_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/filter_category"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_sort_border_View" />
+
+            <TextView
+                android:id="@+id/filter_category_choice_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:text="0"
+                android:textColor="@color/marigold"
+                android:textSize="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/filter_category_choice_end_textView"
+                app:layout_constraintEnd_toStartOf="@+id/filter_category_choice_end_textView"
+                app:layout_constraintTop_toTopOf="@+id/filter_category_choice_end_textView" />
+
+            <TextView
+                android:id="@+id/filter_category_choice_end_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="27dp"
+                android:text="@string/filter_theme_choice"
+                android:textColor="@color/very_light_pink_two"
+                android:textSize="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/filter_category_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/filter_category_textView" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filter_category_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:orientation="horizontal"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_category_textView"
+                tools:layoutManager="android.support.v7.widget.GridLayoutManager"
+                tools:listitem="@layout/filter_theme_recyclerview_row"
+                tools:spanCount="2">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:id="@+id/filter_category_border_View"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="38dp"
+                android:background="@color/very_light_pink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_category_recyclerView" />
+
+            <TextView
+                android:id="@+id/filter_theme_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/filter_theme"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_category_border_View" />
+
+            <TextView
+                android:id="@+id/filter_theme_choice_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:text="0"
+                android:textColor="@color/marigold"
+                android:textSize="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/filter_theme_choice_end_textView"
+                app:layout_constraintEnd_toStartOf="@+id/filter_theme_choice_end_textView"
+                app:layout_constraintTop_toTopOf="@+id/filter_theme_choice_end_textView" />
+
+            <TextView
+                android:id="@+id/filter_theme_choice_end_textView"
+                fontPath="scdream7.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="27dp"
+                android:text="@string/filter_theme_choice"
+                android:textColor="@color/very_light_pink_two"
+                android:textSize="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/filter_theme_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/filter_theme_textView" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filter_theme_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:orientation="horizontal"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filter_theme_textView"
+                tools:layoutManager="android.support.v7.widget.GridLayoutManager"
+                tools:listitem="@layout/filter_theme_recyclerview_row"
+                tools:spanCount="2">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/filter_apply_textView"
+        fontPath="scdream5.otf"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/marigold"
+        android:gravity="center"
+        android:text="@string/filter_apply"
+        android:textColor="@color/white"
+        android:textSize="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
+

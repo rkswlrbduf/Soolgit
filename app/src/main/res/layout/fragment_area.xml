@@ -1,101 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.nitrico.stickyscrollview.StickyScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/very_light_pink"
+    android:fitsSystemWindows="false">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/very_light_pink">
+        android:layout_height="145dp"
+        android:background="@color/white">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/main_area_content_dong"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:background="@color/white"
-            android:paddingTop="14dp"
-            android:paddingBottom="10dp">
+        <include
+            layout="@layout/fragment_area_coordinatorlayout_header" android:id="@+id/fragment_area_coordinatorlayout_header"/>
 
-            <ImageView
-                android:id="@+id/main_area_content_dong_hamburger_imageview"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginLeft="14dp"
-                android:src="@drawable/hambuger"
-                app:layout_constraintBottom_toBottomOf="@+id/main_area_content_dong_textview"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/main_area_content_dong_textview" />
+    </android.support.design.widget.AppBarLayout>
 
-            <TextView
-                android:id="@+id/main_area_content_dong_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="@string/area_zone"
-                android:textColor="@color/black_two"
-                android:textSize="14dp"
-                fontPath="notosanskr_bold_hestia.otf"
-                app:layout_constraintLeft_toRightOf="@+id/main_area_content_dong_hamburger_imageview" />
+    <include
+        android:id="@+id/fragment_area_content"
+        layout="@layout/fragment_area_content" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_area_content_dong_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="12dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingLeft="14dp"
-                android:paddingRight="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_area_content_dong_textview"
-                tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                tools:listitem="@layout/main_area_content_dong_recyclerview_row"></android.support.v7.widget.RecyclerView>
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/main_area_content_store"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_area_content_dong">
-
-            <TextView
-                android:id="@+id/main_area_content_store_dong_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="9dp"
-                android:paddingBottom="9dp"
-                android:text="청라동·계산동"
-                android:background="@color/white"
-                android:textColor="@color/black_two"
-                fontPath="notosanskr_bold_hestia.otf"
-                android:paddingLeft="12dp"
-                android:textSize="14dp"
-                android:tag="sticky"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:id="@+id/main_area_content_store_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_area_content_store_dong_textview"
-                tools:listitem="@layout/main_area_content_store_recyclerview_row" />
-
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.constraint.ConstraintLayout>
-</com.github.nitrico.stickyscrollview.StickyScrollView>
+</android.support.design.widget.CoordinatorLayout>

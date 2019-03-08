@@ -22,7 +22,7 @@ class AreaDongRecyclerViewAdapter(val context: Context, val list: List<DongData>
         else helper.setVisible(R.id.main_area_content_dong_row_selected_imageview, false)
         helper.setText(R.id.main_area_content_dong_row_textview, item.DongName)
         Glide.with(context)
-                .load("https://s3.ap-northeast-2.amazonaws.com/soolgitbucket01/background.png")
+                .load(item.DongImage)
                 .apply(RequestOptions.placeholderOf(R.color.grey))
                 .apply(RequestOptions().centerCrop())
                 .apply(RequestOptions.overrideOf(helper.getView<ImageView>(R.id.main_area_content_dong_row_imageview).width, helper.getView<ImageView>(R.id.main_area_content_dong_row_imageview).height))

@@ -2,7 +2,7 @@ package blackstone.com.soolgit.DataClass
 
 import com.google.gson.annotations.SerializedName
 
-class StoreNoImageMenuData {
+class StoreNoImageMenuData() {
 
     @SerializedName("MENU_NM")
     var MENU_NM: String? = null

@@ -26,8 +26,10 @@
     <color name="total_black">#000000</color>
     <color name="black_four">#2f2f2f</color>
     <color name="coloor">#F6BF42</color>
-    <color name="marigold">#ffbd00</color>
+    <color name="marigold">#ffdb00</color>
     <color name="sunflower_yellow">#ffde00</color>
     <color name="camo_green">#3c1e1e</color>
     <color name="naver_green">#2DB400</color>
+    <color name="bright_orange">#ff6b00</color>
+    <color name="very_light_pink_two">#b7b7b7</color>
 </resources>
