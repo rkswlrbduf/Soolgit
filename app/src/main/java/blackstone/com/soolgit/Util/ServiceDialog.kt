@@ -45,10 +45,6 @@ class ServiceDialog(val activity: Activity, val item: ServiceCompleteData) : Dia
 
         service_dialog_pinview.setPinViewEventListener {pinview: Pinview, b: Boolean ->
             if(item.storecode == pinview.value) {
-                service_dialog_complete_title.visibility = View.VISIBLE
-                service_dialog_complete_content.visibility = View.VISIBLE
-                service_dialog_pinview.visibility = View.GONE
-                service_dialog_guide_textview.visibility = View.GONE
                 val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(pinview.windowToken, 0)
                 BaseActivity.baseServer?.servicecomplete(item)?.enqueue(object : Callback<Void> {

@@ -115,33 +115,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <TextView
-        android:id="@+id/service_dialog_complete_title"
-        fontPath="scdream7.otf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/service_complete_title"
-        android:textColor="@color/very_light_pink"
-        android:textSize="30dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/service_dialog_complete_content"
-        app:layout_constraintTop_toBottomOf="@+id/service_dialog_guide"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/service_dialog_complete_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="27dp"
-        android:text="@string/service_complete_content"
-        android:textColor="@color/very_light_pink"
-        android:textSize="10dp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/service_dialog_complete_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 </android.support.constraint.ConstraintLayout>
