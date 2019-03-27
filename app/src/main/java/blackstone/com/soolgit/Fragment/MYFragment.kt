@@ -4,19 +4,19 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import blackstone.com.soolgit.MainActivity
 import blackstone.com.soolgit.MyFragmentActivities.HistoryActivity
 import blackstone.com.soolgit.MyFragmentActivities.NoticeActivity
+import blackstone.com.soolgit.MyFragmentActivities.SettingActivity
 import blackstone.com.soolgit.R
 import blackstone.com.soolgit.Util.MyUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.kakao.plusfriend.PlusFriendService
 import kotlinx.android.synthetic.main.fragment_my.view.*
 import q.rorbin.badgeview.QBadgeView
 
@@ -24,12 +24,11 @@ class MYFragment : BaseFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_my, container, false)
-
         val mUtil = MyUtil(context)
-
         view.main_my_content_etc_notice_container.setOnClickListener(this)
         view.main_my_content_etc_history_textview.setOnClickListener(this)
-
+        view.main_my_content_etc_service_center_container.setOnClickListener(this)
+        view.main_my_content_etc_setting_container.setOnClickListener(this)
         view.main_my_content_info_name_textview.text = mUtil.NM + "님"
         Glide.with(context!!)
                 .load(mUtil.IMG)
@@ -44,15 +43,15 @@ class MYFragment : BaseFragment(), View.OnClickListener {
                 .setBadgeTextSize(convertDpToPixel(2f, context!!), true)
                 .setBadgeBackgroundColor(Color.parseColor("#ffbd00"))
                 .setGravityOffset(convertDpToPixel(7f, context!!), convertDpToPixel(3f, context!!), true)
-0
         return view
-
     }
 
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.main_my_content_etc_notice_container -> startActivity(Intent(context, NoticeActivity::class.java))
             R.id.main_my_content_etc_history_textview -> startActivity(Intent(context, HistoryActivity::class.java))
+            R.id.main_my_content_etc_service_center_container -> PlusFriendService.getInstance().chat(context, "_VQxnDC")
+            R.id.main_my_content_etc_setting_container -> startActivity(Intent(context, SettingActivity::class.java))
         }
     }
 }

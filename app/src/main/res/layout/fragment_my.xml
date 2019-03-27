@@ -142,28 +142,6 @@
 
             </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/main_my_content_etc_regular_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_my_content_etc_history_container">
-
-                <TextView
-                    android:id="@+id/main_my_content_etc_regular_textview"
-                    fontPath="notosanskr_bold_hestia.otf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="36dp"
-                    android:paddingTop="17dp"
-                    android:paddingRight="36dp"
-                    android:paddingBottom="17dp"
-                    android:text="@string/my_etc_regular"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/main_my_content_etc_service_center_container"
@@ -171,7 +149,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_my_content_etc_regular_container">
+                app:layout_constraintTop_toBottomOf="@+id/main_my_content_etc_history_container">
 
                 <TextView
                     android:id="@+id/main_my_content_etc_service_center_textview"

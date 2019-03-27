@@ -32,7 +32,8 @@ class SplashActivity : BaseActivity() {
             }, SPLASH_TIME_OUT.toLong())
         } else {
             Handler().postDelayed({
-                mUtil?.FILTERTHEME = HashMap()
+                mUtil?.FILTERCATEGORY = ArrayList()
+                mUtil?.FILTERTHEME = ArrayList()
                 val i = Intent(this@SplashActivity, MainActivity::class.java)
                 startActivity(i)
                 finish()

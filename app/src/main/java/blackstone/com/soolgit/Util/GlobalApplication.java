@@ -10,7 +10,10 @@ import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import blackstone.com.soolgit.R;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 
 public class GlobalApplication extends Application {
 
@@ -39,9 +42,13 @@ public class GlobalApplication extends Application {
                 .addCustom2(Typekit.createFromAsset(this, "scdream8.otf"))
                 .addCustom3(Typekit.createFromAsset(this, "yanolja_bold.ttf"));*/
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("notosanskr_medium_hestia.otf")
-                        .build());
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("notosanskr_medium_hestia.otf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
 
         instance = this;
 
@@ -59,6 +66,7 @@ public class GlobalApplication extends Application {
         /**
          * Session Config에 대해서는 default값들이 존재한다.
          * 필요한 상황에서만 override해서 사용하면 됨.
+         *
          * @return Session의 설정값.
          */
         @Override
@@ -66,7 +74,7 @@ public class GlobalApplication extends Application {
             return new ISessionConfig() {
                 @Override
                 public AuthType[] getAuthTypes() {
-                    return new AuthType[] {AuthType.KAKAO_TALK_ONLY};
+                    return new AuthType[]{AuthType.KAKAO_TALK_ONLY};
                 }
 
                 @Override

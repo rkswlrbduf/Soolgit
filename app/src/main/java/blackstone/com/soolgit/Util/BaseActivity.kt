@@ -21,11 +21,11 @@ import com.amazonaws.mobile.client.AWSMobileClient
 import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.GsonBuilder
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 
 open class BaseActivity : AppCompatActivity() {
@@ -48,6 +48,9 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setStatusBarColor()
+
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         AWSMobileClient.getInstance().initialize(this) {
@@ -88,15 +91,13 @@ open class BaseActivity : AppCompatActivity() {
         kakaoServer = kakaoRetrofit.create(KakaoServerInterface::class.java)
         userServer = userRetrofit.create(UserServerInterface::class.java)
 
-        setStatusBarColor()
-
     }
 
     /**
      * TypeKit Init
      */
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
     }
 
     /**

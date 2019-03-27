@@ -118,10 +118,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:includeFontPadding="false"
+        android:includeFontPadding="true"
         android:text="9.1"
         android:textColor="@color/brownish_grey_two"
-        android:textSize="12dp"
+        android:textSize="14dp"
+        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/main_area_content_dong_row_store_heart_icon_imageview" />
 

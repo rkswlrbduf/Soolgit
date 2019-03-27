@@ -16,10 +16,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import blackstone.com.soolgit.Adapter.AreaStoreRecyclerViewAdapter
+import blackstone.com.soolgit.DataClass.CategoryData
 import blackstone.com.soolgit.DataClass.StoreData
+import blackstone.com.soolgit.DataClass.ThemeData
 import blackstone.com.soolgit.FilterActivity
 import blackstone.com.soolgit.R
 import blackstone.com.soolgit.StoreActivity
+import blackstone.com.soolgit.StoreLocationActivity
 import blackstone.com.soolgit.Util.*
 import blackstone.com.soolgit.Util.BaseActivity.Companion.baseServer
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -62,11 +65,15 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
     private lateinit var storeRecyclerViewContainer: NestedScrollView
     private lateinit var storeActivityIntent: Intent
     private lateinit var storeRecyclerView: RecyclerView
+    private lateinit var headerCategoryTextView: TextView
+    private lateinit var headerCategoryBackGround: View
     private lateinit var headerThemeTextView: TextView
     private lateinit var headerThemeBackGround: View
+    private lateinit var headerMapImageView: ImageView
 
     private var storeList: ArrayList<StoreData> = ArrayList()
-    private var themeHashMap: HashMap<Int, String> = HashMap()
+    private var categoryArrayList: ArrayList<CategoryData> = ArrayList()
+    private var themeArrayList: ArrayList<ThemeData> = ArrayList()
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -77,7 +84,7 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
                 locationTextView.text = String.format("%s %s", mUtil.getCurrentAddress().locality, mUtil.getCurrentAddress().thoroughfare)
                 collapsibleToolbar.setTransition(R.id.start, R.id.end)
                 initStoreRecyclerView(mView.main_area_content_store_recyclerview, LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false), ySpacesItemDecoration(1, 40, false))
-                initStoreServerData(mView.main_area_content_store_recyclerview, mUtil.getCurrentLocation().longitude, mUtil.getCurrentLocation().latitude)
+                initStoreServerData(mUtil.getCurrentLocation().longitude, mUtil.getCurrentLocation().latitude)
             }
         } else {
             onPause()
@@ -101,9 +108,11 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         loader = view.loader
         storeRecyclerViewContainer = view.main_area_content_store
         storeRecyclerView = view.main_area_content_store_recyclerview
+        headerCategoryTextView = (view.fragment_area_coordinatorlayout_header as View).main_area_header_category_textview
+        headerCategoryBackGround = (view.fragment_area_coordinatorlayout_header as View).main_area_header_category_background
         headerThemeTextView = (view.fragment_area_coordinatorlayout_header as View).main_area_header_theme_textview
         headerThemeBackGround = (view.fragment_area_coordinatorlayout_header as View).main_area_header_theme_background
-
+        headerMapImageView = (view.fragment_area_coordinatorlayout_header as View).main_area_header_map_small_imageview
         locationDialog = LocationDialog(activity!!)
         locationTextView.pivotX = 0f
         locationTextView.pivotY = locationTextView.height.toFloat()
@@ -114,6 +123,7 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         locationIconImageView.setOnClickListener(this)
         filterImageView.setOnClickListener(this)
         searchIconImageView.setOnClickListener(this)
+        headerMapImageView.setOnClickListener(this)
 
         storeAdapter = AreaStoreRecyclerViewAdapter(context!!, storeList, mUtil.getCurrentLocation())
         storeAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
@@ -138,6 +148,11 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
             R.id.main_area_header_search_imageview -> {
 
             }
+            R.id.main_area_header_map_small_imageview -> {
+                val intent = Intent(activity, StoreLocationActivity::class.java)
+                intent.putExtra("storeList", gson.toJson(storeList))
+                startActivity(intent)
+            }
         }
     }
 
@@ -155,6 +170,7 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
     open fun getPost(address: Address) {
         locationTextView.text = String.format("%s %s", address.locality, address.thoroughfare)
         collapsibleToolbar.setTransition(R.id.start, R.id.end)
+        initStoreServerData(mUtil.getCurrentLocation().longitude, mUtil.getCurrentLocation().latitude)
         stopLoader()
     }
 
@@ -187,15 +203,24 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         when (requestCode) {
             LocationDialog.LOCATION_REQUESTCODE -> {
                 locationTextView.text = String.format("%s %s", mUtil.getCurrentAddress().locality, mUtil.getCurrentAddress().thoroughfare)
-                //locationTextView.text = (data!!.extras["RESULT"] as Address).locality
                 collapsibleToolbar.setTransition(R.id.start, R.id.end)
+                initStoreServerData(mUtil.getCurrentLocation().longitude, mUtil.getCurrentLocation().latitude)
             }
             FILTER_REQUESTCODE -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    val type = object : TypeToken<HashMap<Int, String>>() {}.type
-                    themeHashMap = gson.fromJson<HashMap<Int, String>>(data?.getStringExtra("THEME"), type)
-                    if(themeHashMap.size != 0) {
-                        headerThemeTextView.text = String.format("%s 등 %d개 테마", themeHashMap.entries.iterator().next().value, themeHashMap.size)
+                    categoryArrayList = mUtil.FILTERCATEGORY
+                    if(categoryArrayList.size != 0) {
+                        headerCategoryTextView.text = String.format("%s 등 %d개 종류", categoryArrayList[0].CATEGORY_NM, categoryArrayList.size)
+                        headerCategoryTextView.setTextColor(ContextCompat.getColor(context!!, R.color.marigold))
+                        headerCategoryBackGround.background.setColorFilter(ContextCompat.getColor(context!!, R.color.marigold), PorterDuff.Mode.SRC_IN)
+                    } else {
+                        headerCategoryTextView.text = "종류 전체"
+                        headerCategoryTextView.setTextColor(ContextCompat.getColor(context!!, R.color.black))
+                        headerCategoryBackGround.background.clearColorFilter()
+                    }
+                    themeArrayList = mUtil.FILTERTHEME
+                    if(themeArrayList.size != 0) {
+                        headerThemeTextView.text = String.format("%s 등 %d개 테마", themeArrayList[0].THEME_NM, themeArrayList.size)
                         headerThemeTextView.setTextColor(ContextCompat.getColor(context!!, R.color.marigold))
                         headerThemeBackGround.background.setColorFilter(ContextCompat.getColor(context!!, R.color.marigold), PorterDuff.Mode.SRC_IN)
                     } else {
@@ -204,23 +229,32 @@ class AreaFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
                         headerThemeBackGround.background.clearColorFilter()
                     }
                     collapsibleToolbar.setTransition(R.id.start, R.id.end)
+                    initStoreServerData(mUtil.getCurrentLocation().longitude, mUtil.getCurrentLocation().latitude)
                 }
             }
         }
     }
 
-    private fun initStoreServerData(recyclerView: RecyclerView?, PointX: Double, PointY: Double) {
+    private fun initStoreServerData(PointX: Double, PointY: Double) {
         startLoader()
-        baseServer?.storedong(PointX, PointY)?.enqueue(object : Callback<ArrayList<StoreData>> {
+        val filterCategoryIDIntArray: ArrayList<Int> = ArrayList()
+        val filterThemeIDIntArray: ArrayList<Int> = ArrayList()
+        mUtil.FILTERCATEGORY.forEach {
+            filterCategoryIDIntArray.add(it.CATEGORY_ID)
+        }
+        mUtil.FILTERTHEME.forEach {
+            filterThemeIDIntArray.add(it.THEME_ID)
+        }
+        baseServer?.storedong(PointX, PointY, gson.toJson(filterCategoryIDIntArray), gson.toJson(filterThemeIDIntArray))?.enqueue(object : Callback<ArrayList<StoreData>> {
             override fun onResponse(call: Call<ArrayList<StoreData>>, response: Response<ArrayList<StoreData>>) {
                 storeList = response.body()!!
                 Collections.sort(storeList, mComparator.getDistanceComparator())
                 storeAdapter.updateList(storeList)
                 stopLoader()
             }
-
             override fun onFailure(call: Call<ArrayList<StoreData>>, t: Throwable) {
-                Log.e("HPRVAdapter Retro Err", t.toString())
+                stopLoader()
+                showNetworkDialog(context!!)
             }
         })
     }

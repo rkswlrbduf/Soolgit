@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/setting_title_container"
+        android:layout_width="0dp"
+        android:layout_height="59dp"
+        android:paddingStart="20dp">
+
+        <ImageView
+            android:id="@+id/setting_title_back_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/setting_title_textView"
+            fontPath="scdream5.otf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/my_etc_setting"
+            android:textColor="@color/black_two"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/setting_title_back_imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/setting_title_divider_View"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/very_light_pink"
+        app:layout_constraintTop_toBottomOf="@+id/setting_title_container" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_title_divider_View">
+
+        <TextView
+            android:id="@+id/setting_push_toggle_textView"
+            fontPath="notosanskr_regular_hestia.otf"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:gravity="center|start"
+            android:paddingStart="20dp"
+            android:text="@string/setting_push"
+            android:textColor="@color/black_two"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.suke.widget.SwitchButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/setting_push_toggle_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/setting_push_toggle_textView"
+            app:sb_checked_color="@color/marigold"
+            app:sb_show_indicator="false" />
+
+        <View
+            android:id="@+id/setting_inner_divider_View1"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/very_light_pink_two"
+            app:layout_constraintTop_toBottomOf="@+id/setting_push_toggle_textView" />
+
+        <TextView
+            android:id="@+id/setting_privacy_textView"
+            fontPath="notosanskr_regular_hestia.otf"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:gravity="center|start"
+            android:paddingStart="20dp"
+            android:text="@string/setting_privacy"
+            android:textColor="@color/black_two"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setting_inner_divider_View1" />
+
+        <View
+            android:id="@+id/setting_inner_divider_View2"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/very_light_pink_two"
+            app:layout_constraintTop_toBottomOf="@+id/setting_privacy_textView" />
+
+        <TextView
+            android:id="@+id/setting_gps_textView"
+            fontPath="notosanskr_regular_hestia.otf"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:gravity="center|start"
+            android:paddingStart="20dp"
+            android:text="@string/setting_gps"
+            android:textColor="@color/black_two"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setting_inner_divider_View2" />
+
+        <View
+            android:id="@+id/setting_inner_divider_View3"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/very_light_pink_two"
+            app:layout_constraintTop_toBottomOf="@+id/setting_gps_textView" />
+
+        <TextView
+            android:id="@+id/setting_license_textView"
+            fontPath="notosanskr_regular_hestia.otf"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:gravity="center|start"
+            android:paddingStart="20dp"
+            android:text="@string/setting_license"
+            android:textColor="@color/black_two"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setting_inner_divider_View3" />
+
+        <View
+            android:id="@+id/setting_inner_divider_View4"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/very_light_pink_two"
+            app:layout_constraintTop_toBottomOf="@+id/setting_license_textView" />
+
+
+        <TextView
+            android:id="@+id/setting_logout_textView"
+            fontPath="notosanskr_regular_hestia.otf"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:gravity="center|start"
+            android:paddingStart="20dp"
+            android:text="@string/setting_logout"
+            android:textColor="@color/black_two"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setting_inner_divider_View4" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -8,11 +8,11 @@ class HistoryData {
     var STORE_NM: String? = null
     @SerializedName("STORE_M_LCN")
     var STORE_M_LCN: String? = null
-    @SerializedName("MENU_NM")
-    var MENU_NM: String? = null
-    @SerializedName("MENU_COST")
-    var MENU_COST: String? = null
-    @SerializedName("HIS_DT")
-    var HIS_DT: String? = null
+    @SerializedName("SERVICE_NM")
+    var SERVICE_NM: String? = null
+    @SerializedName("SERVICE_COST")
+    var SERVICE_COST: String? = null
+    @SerializedName("ORDER_DT")
+    var ORDER_DT: String? = null
 
 }

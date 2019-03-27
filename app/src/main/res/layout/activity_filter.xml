@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <android.support.v4.widget.NestedScrollView
@@ -13,7 +14,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/white">
 
             <ImageView
@@ -160,8 +161,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:orientation="horizontal"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:clipToPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/filter_category_textView"
@@ -220,22 +222,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/filter_theme_textView" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/filter_theme_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <blackstone.com.soolgit.Util.TagGroup
+                android:id="@+id/filter_theme_tagGroup"
+                style="@style/TagGroup"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
                 android:layout_marginTop="28dp"
-                android:orientation="horizontal"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="28dp"
+                app:atg_textSize="15dp"
+                app:atg_checkedTextColor="@color/black_two"
+                app:atg_checkedBackgroundColor="@color/marigold"
+                app:atg_checkedBorderColor="@color/marigold"
+                app:atg_borderColor="@color/very_light_pink_two"
+                app:atg_textColor="@color/very_light_pink_two"
                 app:layout_constraintStart_toStartOf="parent"
+                app:atg_horizontalPadding="15dp"
+                app:atg_verticalPadding="6dp"
+                app:atg_horizontalSpacing="10dp"
+                app:atg_verticalSpacing="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/filter_theme_textView"
-                tools:layoutManager="android.support.v7.widget.GridLayoutManager"
-                tools:listitem="@layout/filter_theme_recyclerview_row"
-                tools:spanCount="2">
-
-            </android.support.v7.widget.RecyclerView>
+                app:atg_isAppendMode="true"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
 
@@ -257,3 +265,21 @@
 
 </android.support.constraint.ConstraintLayout>
 
+
+
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/filter_theme_recyclerView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="28dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingStart="25dp"-->
+    <!--android:paddingEnd="25dp"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/filter_theme_textView"-->
+    <!--tools:layoutManager="android.support.v7.widget.GridLayoutManager"-->
+    <!--tools:listitem="@layout/filter_theme_recyclerview_row"-->
+    <!--tools:spanCount="2">-->
+    <!--</android.support.v7.widget.RecyclerView>-->

@@ -2,19 +2,23 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notice_row_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
 
     <TextView
         android:id="@+id/notice_row_title_textview"
         fontPath="notosanskr_medium_hestia.otf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="(주)블랙스톤 합병에 따른 이용계약 및 개인정보 승계"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:text="(주)블랙스톤 합병에 따른 이용계약 및 개인정보 승계" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/notice_row_time_textview"
@@ -22,9 +26,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:text="2018.11.01  10:04:22"
         android:textColor="@color/brown_grey"
         android:textSize="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/notice_row_title_textview"
-        android:text="2018.11.01  10:04:22" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notice_row_title_textview" />
+
+    <View
+        android:id="@+id/notice_row_border"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/very_light_pink_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/notice_row_expandable_container"
+        app:layout_constraintTop_toBottomOf="@+id/notice_row_time_textview" />
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/notice_row_expandable_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:el_duration="300"
+        app:el_expanded="false"
+        app:el_parallax="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notice_row_border">
+
+        <TextView
+            android:id="@+id/notice_row_expandable_textView"
+            fontPath="notosanskr_medium_hestia.otf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/black_two"
+            tools:text="OK바리 양산바리 쉑더바리 오케바리" />
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
 
 </android.support.constraint.ConstraintLayout>

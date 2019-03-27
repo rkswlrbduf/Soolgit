@@ -22,6 +22,7 @@
     <color name="grey">#dcdcdc</color>
     <color name="brown_grey_two">#979797</color>
     <color name="brownish_grey_two">#727272</color>
+    <color name="inactive">#c2c2c2</color>
     <color name="brown_grey_three">#888888</color>
     <color name="total_black">#000000</color>
     <color name="black_four">#2f2f2f</color>
@@ -32,4 +33,7 @@
     <color name="naver_green">#2DB400</color>
     <color name="bright_orange">#ff6b00</color>
     <color name="very_light_pink_two">#b7b7b7</color>
+    <color name="greyish_brown_two">#494949</color>
+    <color name="white_two">#fcfcfc</color>
+    <color name="service_color">#F5A517</color>
 </resources>

@@ -8,7 +8,48 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:layout_height="match_parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/map_refresh_container"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/greyish_brown_two"
+        android:paddingStart="30dp"
+        android:paddingTop="11dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="11dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_map_content_store_recyclerview"
+        app:layout_constraintEnd_toEndOf="@+id/main_map_content_store_recyclerview"
+        app:layout_constraintStart_toStartOf="@+id/main_map_content_store_recyclerview">
+
+        <ImageView
+            android:id="@+id/map_refresh_icon_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/refresh"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/map_refresh_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_marginStart="8dp"
+            android:id="@+id/map_refresh_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map_refresh"
+            android:textColor="@color/white_two"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/map_refresh_icon_imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_map_content_store_recyclerview"

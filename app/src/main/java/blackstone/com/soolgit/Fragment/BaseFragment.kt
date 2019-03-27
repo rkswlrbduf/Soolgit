@@ -10,6 +10,10 @@ import android.view.View
 import android.widget.ProgressBar
 import blackstone.com.soolgit.R.id.progressBar
 import com.github.ybq.android.spinkit.style.DoubleBounce
+import android.widget.Toast
+import android.content.DialogInterface
+import android.support.v7.app.AlertDialog
+
 
 open class BaseFragment : Fragment() {
 
@@ -47,6 +51,19 @@ open class BaseFragment : Fragment() {
 //            progressBar.visibility = View.GONE
 //        }
         mProgressDialog?.dismiss()
+    }
+
+    open fun showNetworkDialog(context: Context) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("인터넷 연결 에러")
+        builder.setMessage("인터넷 연결을 확인 후 잠시후에 다시 실행해주세요.")
+        builder.setPositiveButton("확인", object: DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                activity!!.finishAffinity()
+            }
+        })
+        builder.setCancelable(false)
+        builder.show()
     }
 
 }

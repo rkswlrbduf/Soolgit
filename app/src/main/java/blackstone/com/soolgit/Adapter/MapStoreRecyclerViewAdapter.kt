@@ -16,9 +16,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import kotlinx.android.synthetic.main.main_area_content_store_recyclerview_row.view.*
 
-class MapStoreRecyclerViewAdapter(val context: Context, val list: List<MapData>) : BaseQuickAdapter<MapData, BaseViewHolder>(R.layout.main_map_content_store_recyclerview_row, list) {
+class MapStoreRecyclerViewAdapter(val context: Context, val list: ArrayList<StoreData>) : BaseQuickAdapter<StoreData, BaseViewHolder>(R.layout.main_map_content_store_recyclerview_row, list) {
 
-    override fun convert(helper: BaseViewHolder, item: MapData) {
+    override fun convert(helper: BaseViewHolder, item: StoreData) {
         helper.setText(R.id.main_map_content_row_store_name_textview, item.StoreName)
         helper.setText(R.id.main_map_content_row_store_call_textview, item.StoreCall)
         helper.setText(R.id.main_map_content_row_store_location_textview, item.StoreBLocation)
@@ -31,5 +31,11 @@ class MapStoreRecyclerViewAdapter(val context: Context, val list: List<MapData>)
     }
 
     override fun getItemCount(): Int = list.size
+
+    open fun updateList(list: ArrayList<StoreData>) {
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
+    }
 
 }

@@ -11,4 +11,5 @@ class ThemeData(
         @SerializedName("THEME_NM")
         val THEME_NM: String,
         @SerializedName("THEME_IMG")
-        val THEME_IMG: String) : Parcelable
+        val THEME_IMG: String,
+        var THEME_CHECKED: Boolean) : Parcelable

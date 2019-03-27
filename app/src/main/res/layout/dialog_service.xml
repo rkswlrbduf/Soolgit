@@ -9,10 +9,10 @@
         android:id="@+id/service_dialog_coupon_imageview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
         android:adjustViewBounds="true"
         android:src="@drawable/coupon"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,24 +55,24 @@
         android:id="@+id/service_dialog_menu_imageview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/service_dialog_menu_textview"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="@+id/service_dialog_coupon_imageview"
-        app:layout_constraintBottom_toTopOf="@+id/service_dialog_menu_textview"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.3" />
 
     <TextView
         android:id="@+id/service_dialog_menu_textview"
         fontPath="notosanskr_bold_hestia.otf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="생맥주 500cc"
         android:layout_marginTop="5dp"
+        android:text="생맥주 500cc"
         android:textColor="@color/black"
         android:textSize="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/service_dialog_pinview"
+        app:layout_constraintBottom_toTopOf="@+id/service_dialog_guide"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/service_dialog_menu_imageview" />
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.607" />
+        app:layout_constraintGuide_percent="0.707" />
 
     <blackstone.com.soolgit.Util.Pinview
         android:id="@+id/service_dialog_pinview"
@@ -92,16 +92,16 @@
         app:cursorVisible="false"
         app:forceKeyboard="false"
         app:inputType="number"
-        app:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/service_dialog_guide_textview"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:password="false"
         app:pinBackground="@drawable/border_white_number"
         app:pinHeight="42dp"
-        app:splitWidth="8dp"
         app:pinLength="4"
-        app:pinWidth="42dp" />
+        app:pinWidth="42dp"
+        app:splitWidth="8dp"
+        app:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/service_dialog_guide_textview"
@@ -114,5 +114,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/service_dialog_complete_title"
+        fontPath="scdream7.otf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/service_complete_title"
+        android:textColor="@color/very_light_pink"
+        android:textSize="30dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/service_dialog_complete_content"
+        app:layout_constraintTop_toBottomOf="@+id/service_dialog_guide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/service_dialog_complete_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:text="@string/service_complete_content"
+        android:textColor="@color/very_light_pink"
+        android:textSize="10dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/service_dialog_complete_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

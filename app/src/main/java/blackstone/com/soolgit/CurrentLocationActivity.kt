@@ -49,12 +49,13 @@ class CurrentLocationActivity : BaseActivity(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
+        mUtil.setMap(map)
+
         if (mUtil.getLocationPermissionGranted()) {
-            mUtil.setMap(map)
             mUtil.updateLocationUI()
             mUtil.getDeviceLocation()
             mUtil.getMap().setOnCameraIdleListener {
-                mUtil.updateCurrentAddress()
+                mUtil.updateCurrentLocationNAddress()
                 address = mUtil.getCurrentAddress()
                 locationTextView?.text = address.getAddressLine(0).removePrefix("대한민국 ")
             }

@@ -29,11 +29,14 @@ class FilterCategoryRecyclerViewAdapter(val context: Context, val list: ArrayLis
         helper.setText(R.id.filter_category_row_textView, item.CATEGORY_NM)
         helper.addOnClickListener(R.id.filter_category_row_container)
 
-        if(mUtil.FILTERTHEME!![item.CATEGORY_ID] != null) {
-            helper.getView<ImageView>(R.id.filter_category_row_icon_imageView).setColorFilter(ContextCompat.getColor(context, R.color.marigold), PorterDuff.Mode.SRC_IN)
-            helper.getView<TextView>(R.id.filter_category_row_textView).setTextColor(ContextCompat.getColor(context, R.color.marigold))
+        mUtil.FILTERCATEGORY.forEach {
+            if(it.CATEGORY_ID == item.CATEGORY_ID) {
+                helper.getView<ImageView>(R.id.filter_category_row_icon_imageView).setColorFilter(ContextCompat.getColor(context, R.color.marigold), PorterDuff.Mode.SRC_IN)
+                helper.getView<TextView>(R.id.filter_category_row_textView).setTextColor(ContextCompat.getColor(context, R.color.marigold))
+                item.CATEGORY_CHECKED = true
+                return@forEach
+            }
         }
-
     }
 
     open fun updateList(list: ArrayList<CategoryData>) {

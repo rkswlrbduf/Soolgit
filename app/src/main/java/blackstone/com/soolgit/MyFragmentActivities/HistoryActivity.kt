@@ -8,6 +8,7 @@ import blackstone.com.soolgit.Adapter.HistoryRecyclerViewAdapter
 import blackstone.com.soolgit.DataClass.HistoryData
 import blackstone.com.soolgit.R
 import blackstone.com.soolgit.Util.BaseActivity
+import blackstone.com.soolgit.Util.MyUtil
 import blackstone.com.soolgit.Util.ySpacesItemDecoration
 import kotlinx.android.synthetic.main.activity_history.*
 import retrofit2.Call
@@ -20,18 +21,19 @@ class HistoryActivity: BaseActivity() {
 
     private lateinit var historyecyclerView: RecyclerView
     private lateinit var historyRecyclerViewAdapter: HistoryRecyclerViewAdapter
+    private lateinit var mUtil: MyUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
-
+        mUtil = MyUtil(this)
         historyecyclerView = history_recyclerview
         historyecyclerView.addItemDecoration(ySpacesItemDecoration(this, 1, convertDpToPixel(21f, this).toInt(), false))
         historyecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         historyRecyclerViewAdapter = HistoryRecyclerViewAdapter(this, historyList)
         historyecyclerView.adapter = historyRecyclerViewAdapter
 
-        baseServer?.history()?.enqueue(object : Callback<ArrayList<HistoryData>> {
+        baseServer?.orderhistory(mUtil.ID)?.enqueue(object : Callback<ArrayList<HistoryData>> {
             override fun onResponse(call: Call<ArrayList<HistoryData>>, response: Response<ArrayList<HistoryData>>) {
                 historyRecyclerViewAdapter.updateList(response.body()!!)
             }

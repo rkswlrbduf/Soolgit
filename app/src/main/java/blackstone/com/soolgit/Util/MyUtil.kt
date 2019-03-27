@@ -14,6 +14,8 @@ import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.TextView
+import blackstone.com.soolgit.DataClass.CategoryData
+import blackstone.com.soolgit.DataClass.ThemeData
 import blackstone.com.soolgit.Fragment.BaseFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCallback {
@@ -46,21 +49,21 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
 
     private val prefs: SharedPreferences = mContext!!.getSharedPreferences(PREFS_FILENAME, 0)
 
-    var ID: String?
-        get() = prefs.getString(PREF_KEY_ID, "")
+    var ID: String
+        get() = prefs.getString(PREF_KEY_ID, null) ?: ""
         set(value) = prefs.edit().putString(PREF_KEY_ID, value).apply()
-    var NM: String?
-        get() = prefs.getString(PREF_KEY_NM, "")
+    var NM: String
+        get() = prefs.getString(PREF_KEY_NM, null) ?: ""
         set(value) = prefs.edit().putString(PREF_KEY_NM, value).apply()
-    var IMG: String?
-        get() = prefs.getString(PREF_KEY_IMG, "")
+    var IMG: String
+        get() = prefs.getString(PREF_KEY_IMG, null) ?: ""
         set(value) = prefs.edit().putString(PREF_KEY_IMG, value).apply()
-    var TYPE: String?
-        get() = prefs.getString(PREF_KEY_TYPE, "")
+    var TYPE: String
+        get() = prefs.getString(PREF_KEY_TYPE, null) ?: ""
         set(value) = prefs.edit().putString(PREF_KEY_TYPE, value).apply()
     var ZZIM: HashMap<String, Boolean>
         get() {
-            val zzimHashString = prefs.getString("ZZIM", null) ?: return HashMap<String, Boolean>()
+            val zzimHashString = prefs.getString("ZZIM", null) ?: return HashMap()
             val type = object : TypeToken<HashMap<String, Boolean>>() {}.type
             return gson.fromJson<HashMap<String, Boolean>>(zzimHashString, type)
         }
@@ -68,15 +71,25 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
             val zzimHashString = gson.toJson(value)
             prefs.edit().putString("ZZIM", zzimHashString).apply()
         }
-    var FILTERTHEME: HashMap<Int, String>?
+    var FILTERCATEGORY: ArrayList<CategoryData>
         get() {
-            val themeHashString = prefs.getString("FILTERTHEME", null) ?: return HashMap<Int, String>()
-            val type = object : TypeToken<HashMap<Int, String>>() {}.type
-            return gson.fromJson<HashMap<Int, String>>(themeHashString, type)
+            val categoryArrayList = prefs.getString("FILTERCATEGORY", null) ?: return ArrayList()
+            val type = object : TypeToken<ArrayList<CategoryData>>() {}.type
+            return gson.fromJson<ArrayList<CategoryData>>(categoryArrayList, type)
         }
         set(value) {
-            val themeHashString = gson.toJson(value)
-            prefs.edit().putString("FILTERTHEME", themeHashString).apply()
+            val categoryArrayList = gson.toJson(value)
+            prefs.edit().putString("FILTERCATEGORY", categoryArrayList).apply()
+        }
+    var FILTERTHEME: ArrayList<ThemeData>
+        get() {
+            val themeArrayList = prefs.getString("FILTERTHEME", null) ?: return ArrayList()
+            val type = object : TypeToken<ArrayList<ThemeData>>() {}.type
+            return gson.fromJson<ArrayList<ThemeData>>(themeArrayList, type)
+        }
+        set(value) {
+            val themeArrayList = gson.toJson(value)
+            prefs.edit().putString("FILTERTHEME", themeArrayList).apply()
         }
     private var PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002
     private var mContext: Context? = null
@@ -106,12 +119,6 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
 
         try {
             mLastKnownLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            if (mLastKnownLocation == null) {
-                val location = Location("")
-                location.longitude = 126.707783
-                location.latitude = 37.449537
-                mLastKnownLocation = location
-            }
             currentAddress = mGeoCoder.getFromLocation(mLastKnownLocation!!.latitude, mLastKnownLocation!!.longitude, 1)[0]
             currentLocation = mLastKnownLocation!!
 //            if (mLocationPermissionGranted) {
@@ -119,7 +126,13 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
 //            }
         } catch (e: SecurityException) {
             e.printStackTrace()
+            currentAddress = mGeoCoder.getFromLocation(mDefaultLocation.latitude, mDefaultLocation.longitude, 1)[0]
+            val location = Location("")
+            location.longitude = mDefaultLocation.longitude
+            location.latitude = mDefaultLocation.latitude
+            currentLocation = location
         }
+
         mCurrentLocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 try {
@@ -137,6 +150,7 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
 
     fun getCurrentAddress(): Address = currentAddress
     fun getCurrentLocation(): Location = currentLocation
+    fun getGson(): Gson = gson
 
     fun setLocationTextView(locationTextView: TextView?) {
         this.locationTextView = locationTextView
@@ -200,8 +214,12 @@ class MyUtil(mContext: Context?) : ActivityCompat.OnRequestPermissionsResultCall
 
     fun getMap(): GoogleMap = map
 
-    fun updateCurrentAddress() {
+    fun updateCurrentLocationNAddress() {
         currentAddress = mGeoCoder.getFromLocation(map.cameraPosition.target.latitude, map.cameraPosition.target.longitude, 1)[0]
+        val location = Location("")
+        location.latitude = map.cameraPosition.target.latitude
+        location.longitude = map.cameraPosition.target.longitude
+        currentLocation = location
     }
 
     fun updateLocationUI() {

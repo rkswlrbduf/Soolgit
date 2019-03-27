@@ -3,6 +3,9 @@ package blackstone.com.soolgit
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
+import android.text.util.Linkify
 import android.util.Log
 import android.widget.Toast
 import blackstone.com.soolgit.DataClass.NaverProfileData
@@ -29,6 +32,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 const val TYPE_KAKAO = "Kakao"
 const val TYPE_NAVER = "Naver"
@@ -42,7 +47,8 @@ class LoginActivity : BaseActivity() {
     private lateinit var mOAuthLoginModule: OAuthLogin
     private lateinit var mKakaoSessionCallback: KakaoSessionCallback
     private lateinit var userData: UserData
-    private var mUtil: MyUtil? = null
+    private lateinit var mUtil: MyUtil
+    private lateinit var textTransform: Linkify.TransformFilter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +66,17 @@ class LoginActivity : BaseActivity() {
         logout_naver_button.setOnClickListener({ v -> naverLogout() })
         logout_kakao_button.setOnClickListener({ v -> kakaoLogout() })*/
         Session.getCurrentSession().addCallback(mKakaoSessionCallback)
+
+        textTransform = Linkify.TransformFilter { match, url ->
+            ""
+        }
+
+        val privatePrivacyPattern = Pattern.compile("개인정보처리방침")
+        val locationPrivacyPattern = Pattern.compile("위치기반서비스 이용약관")
+
+        Linkify.addLinks(login_agree_textView, privatePrivacyPattern, "private://", null, textTransform)
+        Linkify.addLinks(login_agree_textView, locationPrivacyPattern, "location://", null, textTransform)
+        login_agree_textView.setLinkTextColor(ContextCompat.getColor(this@LoginActivity,R.color.marigold))
 
     }
 
@@ -115,7 +132,7 @@ class LoginActivity : BaseActivity() {
                     naverServer?.naveruser(tokenType + " " + accessToken)?.enqueue(object : retrofit2.Callback<NaverWebRequestData> {
                         override fun onResponse(call: Call<NaverWebRequestData>, response: Response<NaverWebRequestData>) {
                             val res = (response.body() as NaverWebRequestData).response as NaverProfileData
-                            userData = UserData(res.id, res.name, res.profile_image, TYPE_NAVER, res.email, birthday = res.birthday)
+                            userData = UserData(res?.id!!, res?.name!!, res?.profile_image!!, TYPE_NAVER, res.email, birthday = res.birthday)
                             redirectSexActivity(userData)
                         }
 
@@ -141,13 +158,11 @@ class LoginActivity : BaseActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
-                userData = UserData(account?.id, account?.givenName, account?.photoUrl.toString(), TYPE_GOOGLE, account?.email, idToken = account?.idToken)
+                userData = UserData(account?.id!!, account.givenName!!, account.photoUrl.toString(), TYPE_GOOGLE, account?.email, idToken = account?.idToken)
                 redirectSexActivity(userData)
                 //firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
                 e.printStackTrace()
-                Log.d("TAG", e.toString() + e.statusCode)
-                Toast.makeText(this, "Google Sign In failed, update UI appropriately", Toast.LENGTH_SHORT).show()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -218,10 +233,10 @@ class LoginActivity : BaseActivity() {
         intent.putExtra("userData", userData)
         userServer?.createuser(userData)?.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                mUtil?.ID = userData.id
-                mUtil?.NM = userData.name
-                mUtil?.IMG = userData.profileUrl
-                mUtil?.TYPE = userData.type
+                mUtil.ID = userData.id
+                mUtil.NM = userData.name
+                mUtil.IMG = userData.profileUrl
+                mUtil.TYPE = userData.type
                 startActivity(intent)
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left)
                 finish()

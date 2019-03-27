@@ -6,6 +6,8 @@ class MapData {
 
     @SerializedName("STORE_ID")
     var StoreID: Int? = null
+    @SerializedName("STORE_IMG")
+    var StoreImage: String? = null
     @SerializedName("STORE_NM")
     var StoreName: String? = null
     @SerializedName("STORE_CALL")
@@ -16,7 +18,6 @@ class MapData {
     var StorePointX: Double? = null
     @SerializedName("STORE_POINT_Y")
     var StorePointY: Double? = null
-    @SerializedName("STORE_IMG")
-    var StoreImage: String? = null
+
 
 }

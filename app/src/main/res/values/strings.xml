@@ -6,6 +6,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="service_permission_title">술깃한제안 앱 서비스 이용권한 안내</string>
+    <string name="login_agree">로그인 시 개인정보처리방침 및 위치기반서비스 이용약관에 동의하신 것으로 간주됩니다.</string>
     <string name="service_permission_confirm">확인</string>
     <string name="sex_explain_text">성별을 선택해주세요.</string>
     <string name="sex_explain_sub_text">적합한 점포를 추천 드릴게요</string>
@@ -52,4 +53,15 @@
     <string name="dialog_share_sms">문자 메세지로 보내기</string>
     <string name="dialog_share_cancel">취소</string>
     <string name="filter_theme_choice">개 선택</string>
+    <string name="map_refresh">화면 내 재검색</string>
+    <string name="app_privacy">개인정보처리방침</string>
+    <string name="app_intro">술깃한제안 제휴 문의 혹은 서비스 이용관련 문의가 있으시면 아래로 문의주세요.\n\n이메일 | soolgit@gmail.com\n카카오톡 플러스친구 | 술깃한제안\n\n블랙스톤 Co. 대표 정규열\n사업자등록번호 : 407-10-68331\n주소 : 인천광역시 연수구 송도1동 갯벌로 12, 미추홀타워 11층</string>
+    <string name="service_complete_title">서비스 이용 완료</string>
+    <string name="service_complete_content">오늘은 이미 서비스를 이용하셨네요. 내일 다시 이용해주세요.</string>
+    <string name="setting_push">푸쉬 알림 받지 않기</string>
+    <string name="setting_privacy">개인정보 취급방침</string>
+    <string name="setting_gps">위치기반서비스 이용약관</string>
+    <string name="setting_license">오픈소스 라이선스</string>
+    <string name="setting_logout">로그아웃</string>
+
 </resources>

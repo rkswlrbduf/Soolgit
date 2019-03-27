@@ -35,6 +35,7 @@ class AreaStoreRecyclerViewAdapter(val context: Context, val list: ArrayList<Sto
                 .apply(RequestOptions().centerCrop())
                 .apply(RequestOptions.overrideOf(helper.getView<ImageView>(R.id.main_area_content_dong_row_store_imageview).width, helper.getView<ImageView>(R.id.main_area_content_dong_row_store_imageview).height))
                 .into(helper.getView(R.id.main_area_content_dong_row_store_imageview))
+        helper.setText(R.id.main_area_content_dong_row_store_heart_textview, item.StoreZzimCount)
     }
 
     override fun getItemCount(): Int = list!!.size

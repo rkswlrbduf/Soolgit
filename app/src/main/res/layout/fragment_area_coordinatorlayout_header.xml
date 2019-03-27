@@ -32,8 +32,8 @@
         android:paddingTop="4dp"
         android:paddingEnd="4dp"
         android:paddingBottom="4dp"
-        android:textColor="@color/black"
         android:text="종류 전체"
+        android:textColor="@color/black"
         android:textSize="11dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,12 +68,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="106dp"
-        android:textColor="@color/black"
         android:paddingStart="4dp"
         android:paddingTop="4dp"
         android:paddingEnd="4dp"
         android:paddingBottom="4dp"
         android:text="테마 전체"
+        android:textColor="@color/black"
         android:textSize="11dp"
         app:layout_constraintStart_toEndOf="@+id/main_area_header_category_textview"
         app:layout_constraintTop_toTopOf="parent" />
@@ -122,10 +122,19 @@
         android:id="@+id/main_area_content_header_location_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/custom_my_location"
-        app:layout_constraintTop_toTopOf="@+id/main_area_header_location_textview"
-        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_location_textview"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/main_area_header_location_textview"/>
+        android:src="@drawable/custom_my_location"
+        app:layout_constraintBottom_toBottomOf="@+id/main_area_header_location_textview"
+        app:layout_constraintStart_toEndOf="@+id/main_area_header_location_textview"
+        app:layout_constraintTop_toTopOf="@+id/main_area_header_location_textview" />
+
+    <View
+        android:id="@+id/main_area_content_header_border_View"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/very_light_pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </blackstone.com.soolgit.Util.CollapsibleToolbar>

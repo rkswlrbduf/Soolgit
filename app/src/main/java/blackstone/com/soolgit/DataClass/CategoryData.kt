@@ -8,4 +8,5 @@ data class CategoryData(
         @SerializedName("CATEGORY_NM")
         val CATEGORY_NM: String,
         @SerializedName("CATEGORY_IMG")
-        val CATEGORY_IMG: String)
+        val CATEGORY_IMG: String,
+        var CATEGORY_CHECKED : Boolean = false)

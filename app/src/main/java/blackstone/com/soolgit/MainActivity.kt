@@ -1,5 +1,6 @@
 package blackstone.com.soolgit
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -46,13 +47,14 @@ class MainActivity : BaseActivity() {
 
     fun initTab() {
         for (i in 0..3) {
-            mTabEntities?.add(TabEntity(tabList[i], mIconSelectIds[i], mIconUnselectIds[i]))
+            mTabEntities.add(TabEntity(tabList[i], mIconSelectIds[i], mIconUnselectIds[i]))
         }
         main_tablayout.setTabData(mTabEntities)
         main_tablayout.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
                 main_viewpager.setCurrentItem(position, false)
             }
+
             override fun onTabReselect(position: Int) {
             }
         })
@@ -60,6 +62,8 @@ class MainActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        BusProvider().getInstance().post(ActivityResultEvent(requestCode, resultCode, data))
+        if (resultCode == Activity.RESULT_OK) {
+            BusProvider().getInstance().post(ActivityResultEvent(requestCode, resultCode, data))
+        }
     }
 }

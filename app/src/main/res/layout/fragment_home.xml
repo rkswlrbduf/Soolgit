@@ -15,7 +15,7 @@
             android:id="@+id/main_home_image_viewpager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="360:140"
+            app:layout_constraintDimensionRatio="360:170"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="인천광역시 서구 청라동"
                 android:textColor="@color/white"
-                android:textSize="10dp"
+                android:textSize="11dp"
                 app:layout_constraintBottom_toBottomOf="@id/main_home_search_imageview"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -207,9 +207,59 @@
                 android:id="@+id/main_home_content_location_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                tools:itemCount="5"
+                android:paddingBottom="50dp"
                 tools:listitem="@layout/main_home_content_location_recyclerview_row">
 
             </android.support.v7.widget.RecyclerView>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="#EFF0F2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_home_content_location">
+
+            <ImageView
+                android:id="@+id/bottom_inform_logo_ImageView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                android:src="@drawable/app_full_logo"
+                android:tint="#C3C2C2" />
+
+            <TextView
+                android:id="@+id/bottom_inform_privacy_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginTop="5dp"
+                android:textColor="#C3C2C2"
+                android:textSize="10dp"
+                android:background="@drawable/privacy_border_05dp"
+                android:text="@string/app_privacy"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_inform_logo_ImageView" />
+
+            <TextView
+                android:id="@+id/bottom_inform_intro_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fontPath="scdream4.otf"
+                android:text="@string/app_intro"
+                android:layout_marginTop="5dp"
+                android:textColor="#C3C2C2"
+                android:textSize="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/bottom_inform_privacy_textView"/>
+
 
         </android.support.constraint.ConstraintLayout>
 

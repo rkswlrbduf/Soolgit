@@ -48,6 +48,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
     private var locationTextView: TextView? = null
     private var imageViewPager: ViewPager? = null
     private var dotsIndicator: WormDotsIndicator? = null
+    private var hotplaceTextView: TextView? = null
 
     private lateinit var hotplaceStoreAdapter: HomeHotPlaceRecyclerViewAdapter
     private lateinit var themeStoreAdapter: HomeThemeRecyclerViewAdapter
@@ -84,6 +85,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         locationTextView = view?.main_home_location_textview
         dotsIndicator = view?.main_home_dotsindicator
         imageViewPager = view?.main_home_image_viewpager
+        hotplaceTextView = view?.main_home_content_hotplace_textview
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,13 +106,16 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
 
     @Subscribe
     open fun getPost(address: Address) {
-        locationTextView?.text = String.format("%s %s", address.locality, address.featureName)
+        locationTextView?.text = String.format("%s %s %s", address.locality, address.subLocality, address.thoroughfare)
+        hotplaceTextView?.text = String.format("%s 근처 핫플레이스", address.thoroughfare)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == LocationDialog.LOCATION_REQUESTCODE) {
-            locationTextView?.text = (data!!.extras["RESULT"] as Address).locality
+            val address = data!!.extras["RESULT"] as Address
+            locationTextView?.text = String.format("%s %s %s", address.locality, address.subLocality, address.thoroughfare)
+            hotplaceTextView?.text = String.format("%s 근처 핫플레이스", address.thoroughfare)
         }
     }
 
@@ -121,9 +126,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
 
         mUtil.callPermission(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
         locationTextView?.text = String.format("%s %s %s", mUtil.getCurrentAddress().locality, mUtil.getCurrentAddress().subLocality, mUtil.getCurrentAddress().thoroughfare)
+        hotplaceTextView?.text = String.format("%s 근처 핫플레이스", mUtil.getCurrentAddress().thoroughfare)
 
         initViewPager()
-        initHotPlaceRecyclerView(hotplaceRecyclerView, GridLayoutManager(context, 2), ySpacesItemDecoration(2, mUtil!!.convertDpToPixel(12f, context!!).toInt(), false))
+        initHotPlaceRecyclerView(hotplaceRecyclerView, GridLayoutManager(context, 2), ySpacesItemDecoration(2, mUtil.convertDpToPixel(12f, context!!).toInt(), false))
         initThemeRecyclerView(themeRecyclerView, LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false), xSpacesItemDecoration(1, mUtil.convertDpToPixel(10f, context!!).toInt(), true))
         initConceptRecyclerView(conceptRecyclerView, LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false), ySpacesItemDecoration(1, 30, false))
         serverViewPager()
@@ -136,6 +142,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         locationDialog.setOnCurrentChanged(this)
 
         return mView
+
     }
 
     private fun initViewPager() {
@@ -186,7 +193,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
             }
 
             override fun onFailure(call: Call<ArrayList<HotPlaceStoreData>>, t: Throwable) {
-                Log.e("HPRVAdapter Retro Err", t.toString())
+                showNetworkDialog(context!!)
             }
         })
     }

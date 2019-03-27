@@ -12,5 +12,7 @@ class StoreServiceData {
     var TAG_NM: ArrayList<String>? = null
     @SerializedName("SERVICE_IMG")
     var SERVICE_IMG: String? = null
+    @SerializedName("SERVICE_COST")
+    var SERVICE_COST: String? = null
 
 }

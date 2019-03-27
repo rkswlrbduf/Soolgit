@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.telephony.SmsManager
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -16,10 +15,6 @@ import android.widget.TextView
 import blackstone.com.soolgit.Adapter.StoreImageSliderAdapter
 import blackstone.com.soolgit.Adapter.StoreNoImageMenuRecyclerViewAdapter
 import blackstone.com.soolgit.Adapter.StorePlaceRecyclerViewAdapter
-import blackstone.com.soolgit.DataClass.StoreDetailData
-import blackstone.com.soolgit.DataClass.StoreImageMenuData
-import blackstone.com.soolgit.DataClass.StoreNoImageMenuData
-import blackstone.com.soolgit.DataClass.StorePlaceData
 import blackstone.com.soolgit.Util.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -30,6 +25,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.content.Intent
 import android.net.Uri
+import android.support.v7.content.res.AppCompatResources
+import android.widget.Toast
+import blackstone.com.soolgit.DataClass.*
+import com.squareup.otto.Subscribe
 
 
 class StoreActivity : BaseActivity(), View.OnClickListener {
@@ -121,14 +120,44 @@ class StoreActivity : BaseActivity(), View.OnClickListener {
 
     }
 
+    @Subscribe
+    fun getBoolean(inactiveBus: InactiveBus) {
+        storeConfirmTextView.background = AppCompatResources.getDrawable(this, R.color.inactive)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        BusProvider().getInstance().register(this)
         setContentView(R.layout.activity_store)
         init()
         storeServer(storeID)
         imageMenuServer(storeID)
         noImageMenuServer(storeID)
         placeServer(storeID)
+        serviceCheck()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        BusProvider().getInstance().unregister(this)
+    }
+
+    private fun serviceCheck() {
+        baseServer?.servicecheck(mUtil.ID, storeID)?.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.body()!!.equals("true")) {
+                    storeConfirmTextView.background = AppCompatResources.getDrawable(this@StoreActivity,R.color.inactive)
+                    storeConfirmTextView.setOnClickListener {
+                        ServiceCompleteDialog(this@StoreActivity).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+
+            }
+        })
+
     }
 
     private fun storeServer(id: String) {
@@ -202,6 +231,18 @@ class StoreActivity : BaseActivity(), View.OnClickListener {
         })
     }
 
+    private fun serverZzimData(checked: Boolean) {
+        baseServer?.zzim(storeID, mUtil.ID, checked)?.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("HPRVAdapter Retro Err", t.toString())
+            }
+        })
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.store_zzim_imageview -> {
@@ -209,11 +250,13 @@ class StoreActivity : BaseActivity(), View.OnClickListener {
                     val hashMap = mUtil.ZZIM
                     hashMap.put(storeID, true)
                     mUtil.ZZIM = hashMap
+                    serverZzimData(true)
                     storeZzimImageView.setImageResource(R.drawable.like_button_active)
                 } else {
                     val hashMap = mUtil.ZZIM
                     hashMap.remove(storeID)
                     mUtil.ZZIM = hashMap
+                    serverZzimData(false)
                     storeZzimImageView.setImageResource(R.drawable.like_button_inactvie)
                 }
             }
@@ -255,7 +298,9 @@ class StoreActivity : BaseActivity(), View.OnClickListener {
                 bundle?.putParcelable("item", storeDetailData)
                 bottomSheetDialog.arguments = bundle
                 bottomSheetDialog.show(supportFragmentManager, "bottomSheet")
+
             }
         }
     }
+
 }

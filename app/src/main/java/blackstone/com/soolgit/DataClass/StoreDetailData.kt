@@ -13,6 +13,8 @@ class StoreDetailData : Parcelable {
     var STORE_NM: String? = null
     @SerializedName("STORE_B_LCN")
     var STORE_B_LCN: String? = null
+    @SerializedName("STORE_M_LCN")
+    var Store_M_LCN: String? = null
     @SerializedName("STORE_TIME")
     var STORE_TIME: String? = null
     @SerializedName("STORE_CALL")
@@ -25,5 +27,7 @@ class StoreDetailData : Parcelable {
     var IMG_ID: ArrayList<String>? = null
     @SerializedName("IMG_PATH")
     var IMG_PATH: ArrayList<String>? = null
+    @SerializedName("STORE_CODE")
+    var STORE_CODE: String? = null
 
 }
