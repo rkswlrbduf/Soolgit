@@ -14,15 +14,59 @@ androidExtensions {
 android {
     compileSdkVersion 28
     buildToolsVersion '28.0.2'
-    defaultConfig {
-        applicationId "blackstone.com.soolgit"
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 8
-        versionName "0.0.8"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+
+    //File 불러오기
+    def versionPropsFile = file('version.properties')
+
+    if (versionPropsFile.canRead()) {
+        Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def value = 0
+        def runTasks = gradle.startParameter.taskNames
+        println("OKKKKKK"+runTasks+"LLLL")
+        if ('assemble' in runTasks || 'assembleRelease' in runTasks || 'aR' in runTasks) {
+            value = 1
+        }
+
+        def versionMajor = 0
+        def versionMinor = 0
+        def versionPatch = versionProps['VERSION_PATCH'].toInteger() + value
+
+        def versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
+        def versionNumber = versionProps['VERSION_NUMBER'].toInteger() + value
+
+        versionProps['VERSION_PATCH'] = versionPatch.toString()
+        versionProps['VERSION_BUILD'] = versionBuild.toString()
+        versionProps['VERSION_NUMBER'] = versionNumber.toString()
+
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
+            applicationId "blackstone.com.soolgit"
+            minSdkVersion 19
+            targetSdkVersion 28
+            versionCode versionNumber
+            versionName "${versionMajor}.${versionMinor}.${versionPatch} (${versionBuild}) Release"
+            generatedDensities = []
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            multiDexEnabled true
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def fileNaming = "apk/RELEASES"
+                if (outputFileName != null && outputFileName.endsWith('.apk')) {
+                    outputFileName = new File("./release/", "${fileNaming}-${versionMajor}.${versionMinor}.${versionPatch}-${outputFileName}")
+                }
+            }
+        }
+
+    } else {
+        throw new GradleException("Could not read version.properties.properties!")
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -134,8 +178,8 @@ dependencies {
     /**
      * Calligraphy
      */
-    implementation 'io.github.inflationx:calligraphy3:3.1.0'
-    implementation 'io.github.inflationx:viewpump:1.0.0'
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    //implementation 'io.github.inflationx:viewpump:1.0.0'
 
     /**
      * Recyclerview Adapter Helper

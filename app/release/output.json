@@ -1,1 +1,1 @@
-[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":8,"versionName":"0.0.8","enabled":true,"outputFile":"app-release.apk","fullName":"release","baseName":"release"},"path":"app-release.apk","properties":{}}]
+[{"outputType":{"type":"APK"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":11,"versionName":"0.0.11 (48) Release","enabled":true,"outputFile":"./release/apk/RELEASES-0.0.11-app-release.apk","fullName":"release","baseName":"release"},"path":"./release/apk/RELEASES-0.0.11-app-release.apk","properties":{}}]

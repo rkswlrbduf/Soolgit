@@ -2,10 +2,12 @@ package blackstone.com.soolgit.Util
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.DisplayMetrics
 import android.util.Log
@@ -21,11 +23,11 @@ import com.amazonaws.mobile.client.AWSMobileClient
 import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.GsonBuilder
-import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 
 open class BaseActivity : AppCompatActivity() {
@@ -97,7 +99,8 @@ open class BaseActivity : AppCompatActivity() {
      * TypeKit Init
      */
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
+        //super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     /**
@@ -192,6 +195,19 @@ open class BaseActivity : AppCompatActivity() {
 
     open fun log(tag: String) {
         Log.d("TAG", tag)
+    }
+
+    open fun showNetworkDialog(context: Context) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("인터넷 연결 에러")
+        builder.setMessage("인터넷 연결을 확인 후 잠시후에 다시 실행해주세요.")
+        builder.setPositiveButton("확인", object: DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                finishAffinity()
+            }
+        })
+        builder.setCancelable(false)
+        builder.show()
     }
 
 

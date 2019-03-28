@@ -17,6 +17,7 @@ import blackstone.com.soolgit.Adapter.HomeHotPlaceRecyclerViewAdapter
 import blackstone.com.soolgit.Adapter.HomeConceptRecyclerViewAdapter
 import blackstone.com.soolgit.Adapter.HomeThemeRecyclerViewAdapter
 import blackstone.com.soolgit.Adapter.MainHomeImageSliderAdapter
+import blackstone.com.soolgit.ConceptActivity
 import blackstone.com.soolgit.DataClass.ConceptData
 import blackstone.com.soolgit.DataClass.HotPlaceStoreData
 import blackstone.com.soolgit.R
@@ -173,6 +174,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         themeStoreAdapter = HomeThemeRecyclerViewAdapter(context!!, themeStoreList)
         themeStoreAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         recyclerView?.adapter = themeStoreAdapter
+        themeStoreAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            intent = Intent(context, StoreActivity::class.java)
+            intent.putExtra("ID", (adapter.getItem(position) as HotPlaceStoreData).StoreID)
+            startActivity(intent)
+        }
     }
 
     private fun initConceptRecyclerView(recyclerView: RecyclerView?, layoutManager: LinearLayoutManager, itemDecoration: ySpacesItemDecoration) {
@@ -183,6 +189,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, LocationDialog.callba
         conceptStoreAdapter = HomeConceptRecyclerViewAdapter(context!!, conceptStoreList)
         conceptStoreAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         recyclerView?.adapter = conceptStoreAdapter
+        conceptStoreAdapter.onItemClickListener = BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            intent = Intent(context, ConceptActivity::class.java)
+            intent.putExtra("ID", /*(adapter.getItem(position) as HotPlaceStoreData).StoreID*/"")
+            startActivity(intent)
+        }
     }
 
     private fun serverViewPager() {

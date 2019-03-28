@@ -21,10 +21,7 @@ import blackstone.com.soolgit.R
 import blackstone.com.soolgit.Util.BaseActivity
 import blackstone.com.soolgit.Util.MyUtil
 import blackstone.com.soolgit.Util.xSpacesItemDecoration
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import retrofit2.Call
@@ -97,8 +94,9 @@ class MapFragment : BaseFragment(), GoogleMap.OnMarkerClickListener, View.OnClic
 
         mapView.onCreate(savedInstanceState)
 
-        pinUnselected = BitmapDescriptorFactory.fromResource(R.drawable.pin_unselected)
-        pinSelected = BitmapDescriptorFactory.fromResource(R.drawable.pin_selected)
+        mapView.getMapAsync(this)
+
+
         mRecyclerViewAdapter = MapStoreRecyclerViewAdapter(context!!, mapList)
         mRecyclerview.adapter = mRecyclerViewAdapter
         mRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -155,7 +153,7 @@ class MapFragment : BaseFragment(), GoogleMap.OnMarkerClickListener, View.OnClic
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         snapHelper.attachToRecyclerView(recyclerView)
         recyclerView.layoutManager = layoutManager
-        recyclerView.addItemDecoration(xSpacesItemDecoration(1, convertDpToPixel(10f, context!!).toInt(), true))
+        recyclerView.addItemDecoration(xSpacesItemDecoration(1, convertDpToPixel(11f, context!!).toInt(), true))
     }
 
 //    override fun onSaveInstanceState(outState: Bundle) {
@@ -185,6 +183,8 @@ class MapFragment : BaseFragment(), GoogleMap.OnMarkerClickListener, View.OnClic
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message)
         }
+        pinUnselected = BitmapDescriptorFactory.fromResource(R.drawable.pin_unselected)
+        pinSelected = BitmapDescriptorFactory.fromResource(R.drawable.pin_selected)
         map.setOnCameraIdleListener {
             bounds = map.projection.visibleRegion.latLngBounds
             dy = bounds.southwest.latitude

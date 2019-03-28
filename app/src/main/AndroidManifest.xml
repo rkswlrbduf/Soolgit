@@ -60,6 +60,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".OpenLicenseActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".ConceptActivity" android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

@@ -11,9 +11,7 @@ import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
 import blackstone.com.soolgit.R;
-import io.github.inflationx.calligraphy3.CalligraphyConfig;
-import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
-import io.github.inflationx.viewpump.ViewPump;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class GlobalApplication extends Application {
 
@@ -42,13 +40,19 @@ public class GlobalApplication extends Application {
                 .addCustom2(Typekit.createFromAsset(this, "scdream8.otf"))
                 .addCustom3(Typekit.createFromAsset(this, "yanolja_bold.ttf"));*/
 
-        ViewPump.init(ViewPump.builder()
+        /*ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()
                                 .setDefaultFontPath("notosanskr_medium_hestia.otf")
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
-                .build());
+                .build());*/
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("notosanskr_medium_hestia.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
 
         instance = this;
 

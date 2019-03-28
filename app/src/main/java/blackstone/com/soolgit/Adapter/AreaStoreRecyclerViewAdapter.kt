@@ -38,8 +38,6 @@ class AreaStoreRecyclerViewAdapter(val context: Context, val list: ArrayList<Sto
         helper.setText(R.id.main_area_content_dong_row_store_heart_textview, item.StoreZzimCount)
     }
 
-    override fun getItemCount(): Int = list!!.size
-
     open fun updateList(list: ArrayList<StoreData>) {
         this.list?.clear()
         this.list?.addAll(list)
